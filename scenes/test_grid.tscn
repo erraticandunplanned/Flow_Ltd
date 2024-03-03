@@ -9,12 +9,29 @@ script = ExtResource("1_auty4")
 
 [node name="grid_container" type="Node2D" parent="."]
 
+[node name="obstacle_container" type="Node2D" parent="."]
+
 [node name="draw_canvas" type="Node2D" parent="."]
 script = ExtResource("2_gf1tg")
 
 [node name="flow_container" type="Node2D" parent="."]
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 64.0
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+text = "0"
+
 [node name="cursor" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.853352, 0.342064, 0.394375, 1)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_twmjc")
