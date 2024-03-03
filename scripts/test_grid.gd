@@ -8,16 +8,14 @@ extends Node2D
 @onready var obstaclecontainer = $obstacle_container
 @onready var canvas = $draw_canvas
 @onready var clock = $CanvasLayer/Control/TextEdit
-@onready var cursor = $cursor
+@onready var cursor_snap = $cursor_snap
+@onready var cursor_clock = $cursor_clock
+
+const MAPSIZE = Vector2(512,512)
 
 var time = 0
-var current_object : Node
-var instant_object : Node : 
-	set(obj) : _on_current_object_changed(obj)
-
-var is_dragging = false
-var current_cursor_location = Vector2(0,0)
-var previous_cursor_location = Vector2(0,0)
+var current_flow_node : Node
+var flow = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,56 +40,62 @@ func _ready():
 	neworb.name = "start"
 	#neworb.modulate.from_ok_hsl(17,73,57,255)
 	neworb.global_position = Vector2(96,224)
+	flow.append(neworb.global_position)
 
 
 func _process(delta):
+	## REVERSE OF THE FLOW ARRAY. USED LATER ON
 	
+	
+	## ON MOUSE CLICK, SET NEAREST FLOW NODE TO CURRENT
 	if Input.is_action_just_pressed("left_mouse_click"):
 		for i in flowcontainer.get_children():
 			if get_global_mouse_position().distance_to(i.global_position) < 32:
-				instant_object = i
-				is_dragging = true
+				current_flow_node = i
+				current_flow_node.modulate = Color.MEDIUM_PURPLE
 	
+	## ON MOUSE RELEASE, SET CURRENT FLOW NODE TO NULL
 	if Input.is_action_just_released("left_mouse_click"):
-		instant_object = null
-		is_dragging = false
+		current_flow_node.modulate = Color.WHITE
+		current_flow_node = null
 	
+	## SET "CURSOR_SNAP" TO THE NEAREST GRID LOCATION OF MOUSE
 	var mousepos = get_global_mouse_position()
-	if mousepos.x < 0 or mousepos.y < 0 or mousepos.x > 512 or mousepos.y > 512:
-		instant_object = null
-		is_dragging = false
+	cursor_snap.global_position = Vector2(clamp(floor(mousepos.x / 64) * 64 + 32, 32, MAPSIZE.x - 32), clamp(floor(mousepos.y / 64) * 64 + 32, 32, MAPSIZE.y - 32))
 	
-	var checkpos = Vector2(floor(mousepos.x / 64) * 64 + 32, floor(mousepos.y / 64) * 64 + 32)
-	var is_valid_location = false
-	if abs(current_cursor_location.x - checkpos.x) == 64: is_valid_location = true
-	if abs(current_cursor_location.y - checkpos.y) == 64: is_valid_location = true
-	if previous_cursor_location == Vector2(0,0): is_valid_location = true
-	for i in obstaclecontainer.get_children():
-		if i.global_position == checkpos: is_valid_location = false
-	if checkpos == current_cursor_location: is_valid_location = false
-	if is_valid_location: 
-		cursor.global_position = checkpos
-		if current_cursor_location != Vector2(0,0):
-			update_clock()
-	
-	if is_dragging and current_object != null and cursor.global_position != current_cursor_location:
-		current_object.global_position = cursor.global_position
-		previous_cursor_location = current_cursor_location
-		current_cursor_location = cursor.global_position
-		if previous_cursor_location != Vector2(0,0):
-			canvas.call_remote_draw(previous_cursor_location, current_cursor_location, Color.WHITE, 32.0)
-			var new_obstacle = Node2D.new()
-			obstaclecontainer.add_child(new_obstacle)
-			new_obstacle.global_position = previous_cursor_location
-
-func _on_current_object_changed(obj):
-	if obj != null:
-		current_object = obj
-		obj.modulate = Color.MEDIUM_PURPLE
-	elif current_object != null:
-		current_object.modulate = Color.WHITE
-
-func update_clock():
-	time += 1
-	var text = str(time)
-	clock.text = text
+	if current_flow_node != null:
+		
+		## SET "CURSOR_CLOCK" TO ONLY VALID TILES
+		var is_valid = true
+		if flow.has(cursor_snap.global_position): 
+			var reverse_flow : Array
+			reverse_flow.append_array(flow)
+			reverse_flow.reverse()
+			if reverse_flow.size() > 1:
+				if reverse_flow[1] == cursor_snap.global_position:
+					flow.remove_at(flow.size()-1)
+					canvas.remove_previous()
+					is_valid = true
+				else: is_valid = false
+			else:
+				is_valid = false
+		for i in obstaclecontainer.get_children():
+			if i.global_position == cursor_snap.global_position: is_valid = false
+		
+		if is_valid: cursor_clock.global_position = cursor_snap.global_position
+		
+		## ENSURE FLOW NODE ONLY MOVES ORTHOGONALLY A SINGLE TILE
+		if is_valid and abs(current_flow_node.global_position.x - cursor_clock.global_position.x) + abs(current_flow_node.global_position.y - cursor_clock.global_position.y) == 64:
+			
+			## UPDATE FLOW POSITION AND DRAW LINES
+			current_flow_node.global_position = cursor_clock.global_position
+			flow.append(current_flow_node.global_position)
+			var reverse_flow : Array
+			reverse_flow.append_array(flow)
+			reverse_flow.reverse()
+			canvas.call_remote_draw(reverse_flow[1], reverse_flow[0], Color.WHITE, 32.0)
+			
+			## ADVANCE CLOCK
+			time += 1
+			var text = str(time)
+			clock.text = text

@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://puavol4fknwn"]
+[gd_scene load_steps=3 format=3 uid="uid://puavol4fknwn"]
 
 [ext_resource type="Script" path="res://scripts/test_grid.gd" id="1_auty4"]
 [ext_resource type="Script" path="res://scenes/draw_canvas.gd" id="2_gf1tg"]
-[ext_resource type="Texture2D" uid="uid://djulbnk0nj6my" path="res://textures/basic_dot.png" id="2_twmjc"]
 
 [node name="TestGrid" type="Node2D"]
 script = ExtResource("1_auty4")
@@ -30,8 +29,10 @@ offset_right = 64.0
 offset_bottom = 64.0
 text = "0"
 
-[node name="cursor" type="Sprite2D" parent="."]
-visible = false
+[node name="cursor_snap" type="Node2D" parent="."]
 modulate = Color(0.853352, 0.342064, 0.394375, 1)
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_twmjc")
+
+[node name="cursor_clock" type="Node2D" parent="."]
+modulate = Color(0.853352, 0.342064, 0.394375, 1)
+scale = Vector2(0.25, 0.25)
