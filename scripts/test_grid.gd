@@ -6,13 +6,15 @@ extends Node2D
 @onready var gridcontainer = $grid_container
 @onready var flowcontainer = $flow_container
 @onready var cursor = $cursor
+@onready var canvas = $draw_canvas
 
-var previous_object : Node
-var current_object : Node : 
+var current_object : Node
+var instant_object : Node : 
 	set(obj) : _on_current_object_changed(obj)
 
 var is_dragging = false
-var cursor_location = Vector2(0,0)
+var current_cursor_location = Vector2(0,0)
+var previous_cursor_location = Vector2(0,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,18 +42,36 @@ func _process(delta):
 	if Input.is_action_just_pressed("left_mouse_click"):
 		for i in flowcontainer.get_children():
 			if get_global_mouse_position().distance_to(i.global_position) < 32:
-				current_object = i
+				instant_object = i
+				is_dragging = true
 	
 	if Input.is_action_just_released("left_mouse_click"):
-		current_object = null
+		instant_object = null
+		is_dragging = false
 	
 	var mousepos = get_global_mouse_position()
+	
 	cursor.global_position.x = floor(mousepos.x / 64) * 64 + 32
 	cursor.global_position.y = floor(mousepos.y / 64) * 64 + 32
+	
+	
+	if is_dragging and current_object != null:
+		current_object.global_position = cursor.global_position
+		if cursor.global_position != current_cursor_location:
+			canvas.call_remote_draw(previous_cursor_location, current_cursor_location, Color.WHITE, 32.0)
+			#draw_line(previous_cursor_location, current_cursor_location, Color(0, 1, 1, 1), 16, false)
+			print("draw?")
+	
+	if cursor.global_position != current_cursor_location: 
+		previous_cursor_location = current_cursor_location
+		current_cursor_location = cursor.global_position
+		#print("previous_cursor_location", previous_cursor_location)
+		#print("current_cursor_location", current_cursor_location)
+		#print("")
 
 func _on_current_object_changed(obj):
 	if obj != null:
-		previous_object = obj
+		current_object = obj
 		obj.modulate.a = 0.5
-	elif previous_object != null:
-		previous_object.modulate.a = 1
+	elif current_object != null:
+		current_object.modulate.a = 1
