@@ -18,18 +18,18 @@ var current_flow_node : Node
 var current_flow_color : Color
 
 var flow_dict = {
-	Color.WHITE_SMOKE: [],
-	Color.LIGHT_CORAL: [],
+	Color.WHITE_SMOKE: [Vector2(96,288)],
+	Color.LIGHT_CORAL: [Vector2(96,224)],
 	#Color.MEDIUM_AQUAMARINE: []
 }
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
+	## PLACE MAP TILES
 	for i in range(0,8):
 		for j in range(0,8):
 			var newtile = Sprite2D.new()
 			
-			
+			## "FLOWABLE" TILES PLACED AS GRID, NON-"FLOWABLE" TILES PLACED AS OBSTACLES
 			if i > 0 and i < 7 and j > 2 and j < 5: 
 				gridcontainer.add_child(newtile)
 				newtile.texture = gridtile
@@ -40,21 +40,14 @@ func _ready():
 			newtile.name = str(i) + "," + str(j)
 			newtile.global_position = Vector2(i * 64 + 32, j * 64 + 32)
 	
-	var new_flow = Node2D.new()
-	flowcontainer.add_child(new_flow)
-	new_flow.name = "LIGHT_CORAL"
-	new_flow.global_position = Vector2(96,224)
-	flow_dict.get(Color.LIGHT_CORAL).append(new_flow.global_position)
+	## PLACE INITIAL "FLOW DOTS" ONTO GRID BASED ON "flow_dict" DICTIONARY
+	for f in flow_dict.keys():
+		var new_flow = Node2D.new()
+		flowcontainer.add_child(new_flow)
+		new_flow.name = str(f)
+		var pos = flow_dict.get(f)
+		new_flow.global_position = pos[0]
 	canvas.update_flow(flow_dict)
-	#canvas.update_flow(new_flow.global_position, Color.LIGHT_CORAL)
-	
-	var new_flow_2 = Node2D.new()
-	flowcontainer.add_child(new_flow_2)
-	new_flow_2.name = "WHITE_SMOKE"
-	new_flow_2.global_position = Vector2(96,288)
-	flow_dict.get(Color.WHITE_SMOKE).append(new_flow_2.global_position)
-	canvas.update_flow(flow_dict)
-	
 
 func _process(delta):
 	

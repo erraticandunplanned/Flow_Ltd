@@ -1,7 +1,6 @@
 extends Node2D
 
-@onready var grid_script = preload("res://scripts/test_grid.gd")
-
+## BUG: LINES AND CIRCLES ARE CURRENTLY SHARED BY ALL NODES. UPDATE TO A DICTIONARY
 var lines = []
 var circles = []
 var flow_nodes = []
