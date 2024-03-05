@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://puavol4fknwn"]
 
 [ext_resource type="Script" path="res://scripts/test_grid.gd" id="1_auty4"]
-[ext_resource type="Script" path="res://scenes/draw_canvas.gd" id="2_gf1tg"]
+[ext_resource type="Script" path="res://scripts/draw_canvas.gd" id="2_gf1tg"]
 
 [node name="TestGrid" type="Node2D"]
 script = ExtResource("1_auty4")

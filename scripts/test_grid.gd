@@ -10,11 +10,14 @@ extends Node2D
 @onready var cursor_snap = $cursor_snap
 @onready var cursor_clock = $cursor_clock
 
+@onready var DIS = preload("res://scenes/DIS_obstacle.tscn")
+
 const MAPSIZE = Vector2(512,512)
 
 var time = 0
 var current_flow_node : Node
 var current_flow_color : Color
+var success = false
 
 signal clock_update(time)
 
@@ -23,6 +26,13 @@ var flow_dict = {
 	Color.LIGHT_CORAL: [Vector2(96,224)],
 	Color.MEDIUM_AQUAMARINE: [Vector2(480,32)],
 	Color.LIGHT_GREEN: [Vector2(288,416)]
+}
+var goal_dict = {
+	Color.WHITE_SMOKE: Vector2(416,288),
+	Color.LIGHT_GREEN: Vector2(96,96)
+}
+var obstacle_dict = {
+	0: [Vector2(32,416),Vector2(96,416)]
 }
 
 func _ready():
@@ -43,6 +53,13 @@ func _ready():
 			newtile.name = str(i) + "," + str(j)
 			newtile.global_position = Vector2(i * 64 + 32, j * 64 + 32)
 	
+	## PLACE OBSTACLES
+	for i in obstacle_dict.keys():
+		for j in obstacle_dict.get(i):
+			var new_DIS = DIS.instantiate()
+			obstaclecontainer.add_child(new_DIS)
+			new_DIS.global_position = j
+	
 	## PLACE INITIAL "FLOW DOTS" ONTO GRID BASED ON "flow_dict" DICTIONARY
 	for f in flow_dict.keys():
 		var new_flow = Node2D.new()
@@ -51,8 +68,12 @@ func _ready():
 		var pos = flow_dict.get(f)
 		new_flow.global_position = pos[0]
 	canvas.update_flow(flow_dict)
+	
+	## DRAW GOALS IN MAP
+	canvas.update_goals(goal_dict)
 
 func _process(delta):
+	if success: return
 	
 	## ON MOUSE CLICK, SET NEAREST FLOW NODE TO CURRENT
 	if Input.is_action_just_pressed("left_mouse_click"):
@@ -73,7 +94,7 @@ func _process(delta):
 	var mousepos = get_global_mouse_position()
 	cursor_snap.global_position = Vector2(clamp(floor(mousepos.x / 64) * 64 + 32, 32, MAPSIZE.x - 32), clamp(floor(mousepos.y / 64) * 64 + 32, 32, MAPSIZE.y - 32))
 	
-	## THE REST OF THIS FUNCTION ONLY CALLS IF THE MOUSE IS HOLDING A FLOW CIRCLE
+	## MOST OF THIS FUNCTION ONLY CALLS IF THE MOUSE IS HOLDING A FLOW CIRCLE
 	if current_flow_node != null:
 		
 		## SET "CURSOR_CLOCK" TO ONLY VALID TILES
@@ -118,3 +139,15 @@ func _process(delta):
 			var text = str(time)
 			clock.text = text
 			emit_signal("clock_update", time)
+	
+	## CHECK FOR WIN CONDITION
+	for g in goal_dict.keys():
+		if flow_dict.has(g):
+			success = true
+			var array = flow_dict.get(g)
+			var last_pos = array.back()
+			if goal_dict.get(g) != last_pos: success = false
+		else: success = false
+	
+	if success == true:
+		print("Win!")
