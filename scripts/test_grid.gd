@@ -29,10 +29,12 @@ var flow_dict = {
 }
 var goal_dict = {
 	Color.WHITE_SMOKE: Vector2(416,288),
+	Color.LIGHT_CORAL: Vector2(416,224),
+	Color.MEDIUM_AQUAMARINE: Vector2(480,480),
 	Color.LIGHT_GREEN: Vector2(96,96)
 }
 var obstacle_dict = {
-	0: [Vector2(32,416),Vector2(96,416)]
+	0: [Vector2(32,416)]
 }
 
 func _ready():
@@ -141,9 +143,9 @@ func _process(delta):
 			emit_signal("clock_update", time)
 	
 	## CHECK FOR WIN CONDITION
+	if not goal_dict.keys().is_empty(): success = true
 	for g in goal_dict.keys():
 		if flow_dict.has(g):
-			success = true
 			var array = flow_dict.get(g)
 			var last_pos = array.back()
 			if goal_dict.get(g) != last_pos: success = false
