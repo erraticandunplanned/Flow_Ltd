@@ -5,10 +5,14 @@ var lines = []
 var circles = []
 var flow_nodes = []
 
+var flow_dict = {}
+
 func _process(delta):
 	queue_redraw()
 
 func _draw():
+	if flow_dict == {}: return
+	
 	for i in lines:
 		draw_line(i[0], i[1], i[2], 32, false)
 	for j in circles:
@@ -17,20 +21,27 @@ func _draw():
 		draw_circle(k[0], 28, k[1])
 
 func update_flow(d):
-	var flow_dict = d
+	flow_dict = d
 	flow_nodes.clear()
+	lines.clear()
+	circles.clear()
+	
 	for k in flow_dict.keys():
 		var array = flow_dict.get(k)
+		
+		## UPDATE THE "flow_nodes" ARRAY TO CONTAIN CURRENT POSITION AND COLOR OF ALL FLOW NODES
 		var value = array.back()
 		var newflow = [value, k]
 		flow_nodes.append(newflow)
-
-func call_remote_draw(s, e, c):
-	var newline = [s,e,c]
-	var newcircle = [s,c]
-	lines.append(newline)
-	circles.append(newcircle)
-
-func remove_previous():
-	lines.remove_at(lines.size()-1)
-	circles.remove_at(circles.size()-1)
+		
+		## UPDATE THE "lines" ARRAY TO CONTAIN ALL LINES
+		var last = Vector2.ZERO
+		for i in array:
+			if last != Vector2.ZERO: 
+				var newline = [last,i,k]
+				lines.append(newline)
+			last = i
+			
+			## UPDATE THE "circles" ARRAY TO CONTAIN ALL CORNERS
+			var newcircle = [i,k]
+			circles.append(newcircle)

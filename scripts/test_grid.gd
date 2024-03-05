@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var gridtile = preload("res://textures/grid.png")
 @onready var gridtile_black = preload("res://textures/grid_blank.png")
-@onready var circle = preload("res://textures/basic_dot.png")
 @onready var gridcontainer = $grid_container
 @onready var flowcontainer = $flow_container
 @onready var obstaclecontainer = $obstacle_container
@@ -17,10 +16,13 @@ var time = 0
 var current_flow_node : Node
 var current_flow_color : Color
 
+signal clock_update(time)
+
 var flow_dict = {
 	Color.WHITE_SMOKE: [Vector2(96,288)],
 	Color.LIGHT_CORAL: [Vector2(96,224)],
-	#Color.MEDIUM_AQUAMARINE: []
+	Color.MEDIUM_AQUAMARINE: [Vector2(480,32)],
+	Color.LIGHT_GREEN: [Vector2(288,416)]
 }
 
 func _ready():
@@ -30,12 +32,13 @@ func _ready():
 			var newtile = Sprite2D.new()
 			
 			## "FLOWABLE" TILES PLACED AS GRID, NON-"FLOWABLE" TILES PLACED AS OBSTACLES
-			if i > 0 and i < 7 and j > 2 and j < 5: 
+			#if i > 0 and i < 7 and j > 2 and j < 5: 
+			if true:
 				gridcontainer.add_child(newtile)
 				newtile.texture = gridtile
-			else: 
-				obstaclecontainer.add_child(newtile)
-				newtile.texture = gridtile_black
+			#else: 
+			#	obstaclecontainer.add_child(newtile)
+			#	newtile.texture = gridtile_black
 			
 			newtile.name = str(i) + "," + str(j)
 			newtile.global_position = Vector2(i * 64 + 32, j * 64 + 32)
@@ -70,10 +73,13 @@ func _process(delta):
 	var mousepos = get_global_mouse_position()
 	cursor_snap.global_position = Vector2(clamp(floor(mousepos.x / 64) * 64 + 32, 32, MAPSIZE.x - 32), clamp(floor(mousepos.y / 64) * 64 + 32, 32, MAPSIZE.y - 32))
 	
+	## THE REST OF THIS FUNCTION ONLY CALLS IF THE MOUSE IS HOLDING A FLOW CIRCLE
 	if current_flow_node != null:
 		
 		## SET "CURSOR_CLOCK" TO ONLY VALID TILES
 		var is_valid = true
+		
+		## GOING BACKWARDS 1 TILE IS A VALID TILE
 		if flow_dict.get(current_flow_color).has(cursor_snap.global_position): 
 			var reverse_flow : Array
 			reverse_flow.append_array(flow_dict.get(current_flow_color))
@@ -81,11 +87,19 @@ func _process(delta):
 			if reverse_flow.size() > 1:
 				if reverse_flow[1] == cursor_snap.global_position:
 					flow_dict.get(current_flow_color).remove_at(flow_dict.get(current_flow_color).size()-1)
-					canvas.remove_previous()
 					is_valid = true
 				else: is_valid = false
 			else:
 				is_valid = false
+		
+		## ENTERING ANOTHER FLOW LINE IS NOT A VALID TILE
+		else:
+			for k in flow_dict.keys():
+				var array = flow_dict.get(k)
+				for i in array:
+					if cursor_snap.global_position == i: is_valid = false
+		
+		## ENTERING AN "OBSTACLE" IS NOT A VALID TILE
 		for i in obstaclecontainer.get_children():
 			if i.global_position == cursor_snap.global_position: is_valid = false
 		
@@ -97,14 +111,10 @@ func _process(delta):
 			## UPDATE FLOW POSITION AND DRAW LINES
 			current_flow_node.global_position = cursor_clock.global_position
 			flow_dict.get(current_flow_color).append(current_flow_node.global_position)
-			var reverse_flow : Array
-			reverse_flow.append_array(flow_dict.get(current_flow_color))
-			reverse_flow.reverse()
-			canvas.call_remote_draw(reverse_flow[1], reverse_flow[0], current_flow_color)
 			canvas.update_flow(flow_dict)
-			#canvas.update_flow(reverse_flow[0], current_flow_color)
 			
 			## ADVANCE CLOCK
 			time += 1
 			var text = str(time)
 			clock.text = text
+			emit_signal("clock_update", time)
