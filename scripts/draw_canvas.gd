@@ -7,7 +7,7 @@ var goals = []
 
 var flow_dict = {}
 
-func _process(delta):
+func _process(_delta):
 	queue_redraw()
 
 func _draw():
@@ -23,8 +23,8 @@ func _draw():
 		draw_circle(g[0], 16, g[1])
 
 func update_goals(g):
-	var goal_dict : Dictionary
-	goal_dict = g
+	@warning_ignore("unused_variable")
+	var goal_dict : Dictionary = g
 	for key_color in g.keys():
 		var location = g.get(key_color)
 		var new_goal = [location, key_color]

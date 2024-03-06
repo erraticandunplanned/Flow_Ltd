@@ -20,9 +20,9 @@ var success = false
 
 signal clock_update(time)
 
-var flow_dict = Global.levels.get(0).get(Global.flow_dictionary)
-var goal_dict = Global.levels.get(0).get(Global.goal_dictionary)
-var obstacle_dict = Global.levels.get(0).get(Global.obstacle_dictionary)
+var flow_dict = Global.levels.get(Global.current_level).get(Global.flow_dictionary)
+var goal_dict = Global.levels.get(Global.current_level).get(Global.goal_dictionary)
+var obstacle_dict = Global.levels.get(Global.current_level).get(Global.obstacle_dictionary)
 
 func _ready():
 	## PLACE OBSTACLES
@@ -59,7 +59,7 @@ func _ready():
 	## DRAW GOALS IN MAP
 	canvas.update_goals(goal_dict)
 
-func _process(delta):
+func _process(_delta):
 	if success: return
 	
 	## ON MOUSE CLICK, SET NEAREST FLOW NODE TO CURRENT
@@ -89,6 +89,7 @@ func _process(delta):
 		
 		## GOING BACKWARDS 1 TILE IS A VALID TILE
 		if flow_dict.get(current_flow_color).has(cursor_snap.global_position): 
+			@warning_ignore("unassigned_variable")
 			var reverse_flow : Array
 			reverse_flow.append_array(flow_dict.get(current_flow_color))
 			reverse_flow.reverse()
@@ -138,7 +139,7 @@ func _process(delta):
 	
 	queue_redraw()
 	if success == true:
-		get_parent().advance_level()
+		get_parent().get_parent().advance_level(cursor_clock)
 
 ## DRAW GRID LINES
 func _draw():

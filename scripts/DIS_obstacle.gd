@@ -52,7 +52,7 @@ func _ready():
 	var world = get_parent().get_parent()
 	world.connect("clock_update", _on_clock_update)
 
-func _on_clock_update(t):
+func _on_clock_update(_t):
 	## CHECK FOR VALID POSITION
 	var check_pos = global_position + ( facing * 64 )
 	var is_valid = true
