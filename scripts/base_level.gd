@@ -1,6 +1,5 @@
 extends Node2D
 
-@onready var gridtile = preload("res://scenes/gridtile.tscn")
 @onready var gridcontainer = $grid_container
 @onready var flowcontainer = $flow_container
 @onready var obstaclecontainer = $obstacle_container
@@ -9,11 +8,10 @@ extends Node2D
 @onready var cursor_snap = $cursor_snap
 @onready var cursor_clock = $cursor_clock
 
+@onready var gridtile = preload("res://scenes/gridtile.tscn")
 @onready var DIS = preload("res://scenes/DIS_obstacle.tscn")
 @onready var DIV = preload("res://scenes/DIV_obstacle.tscn")
 @onready var DEV = preload("res://scenes/DEV_obstacle.tscn")
-
-const MAPSIZE = Vector2(512,512)
 
 var time = 0
 var current_flow_node : Node
@@ -22,44 +20,28 @@ var success = false
 
 signal clock_update(time)
 
-var flow_dict = {
-	Color.WHITE_SMOKE: [Vector2(96,288)],
-	Color.LIGHT_CORAL: [Vector2(96,224)],
-	Color.MEDIUM_AQUAMARINE: [Vector2(480,32)],
-	Color.LIGHT_GREEN: [Vector2(288,416)]
-}
-var goal_dict = {
-	Color.WHITE_SMOKE: Vector2(416,288),
-	Color.LIGHT_CORAL: Vector2(416,224),
-	Color.MEDIUM_AQUAMARINE: Vector2(480,480),
-	Color.LIGHT_GREEN: Vector2(96,96)
-}
-var obstacle_dict = {
-	0: [Vector2(32,416)],
-	1: [Vector2(32,96)],
-	2: []
-}
+var flow_dict = Global.levels.get(0).get(Global.flow_dictionary)
+var goal_dict = Global.levels.get(0).get(Global.goal_dictionary)
+var obstacle_dict = Global.levels.get(0).get(Global.obstacle_dictionary)
 
 func _ready():
-	## PLACE MAP TILES
-	for i in range(0,8):
-		for j in range(0,8):
-			var newtile = gridtile.instantiate()
-			newtile.name = str(i) + "," + str(j)
-			newtile.global_position = Vector2(i * 64 + 32, j * 64 + 32)
-	
 	## PLACE OBSTACLES
 	for i in obstacle_dict.get(0):
+		var new_grid = gridtile.instantiate()
+		obstaclecontainer.add_child(new_grid)
+		new_grid.global_position = i
+		new_grid.name = str(new_grid.global_position)
+	for i in obstacle_dict.get(1):
 		var new_DIS = DIS.instantiate()
 		obstaclecontainer.add_child(new_DIS)
 		new_DIS.global_position = i
 		new_DIS.name = "DIS"
-	for i in obstacle_dict.get(1):
+	for i in obstacle_dict.get(2):
 		var new_DIV = DIV.instantiate()
 		obstaclecontainer.add_child(new_DIV)
 		new_DIV.name = "DIV"
 		new_DIV.global_position = i
-	for i in obstacle_dict.get(2):
+	for i in obstacle_dict.get(3):
 		var new_DEV = DEV.instantiate()
 		obstaclecontainer.add_child(new_DEV)
 		new_DEV.name = "DEV"
@@ -97,7 +79,7 @@ func _process(delta):
 	
 	## SET "CURSOR_SNAP" TO THE NEAREST GRID LOCATION OF MOUSE
 	var mousepos = get_global_mouse_position()
-	cursor_snap.global_position = Vector2(clamp(floor(mousepos.x / 64) * 64 + 32, 32, MAPSIZE.x - 32), clamp(floor(mousepos.y / 64) * 64 + 32, 32, MAPSIZE.y - 32))
+	cursor_snap.global_position = Vector2(clamp(floor(mousepos.x / 64) * 64 + 32, 32, Global.MAPSIZE - 32), clamp(floor(mousepos.y / 64) * 64 + 32, 32, Global.MAPSIZE - 32))
 	
 	## MOST OF THIS FUNCTION ONLY CALLS IF THE MOUSE IS HOLDING A FLOW CIRCLE
 	if current_flow_node != null:
@@ -156,12 +138,12 @@ func _process(delta):
 	
 	queue_redraw()
 	if success == true:
-		print("Win!")
+		get_parent().advance_level()
 
 ## DRAW GRID LINES
 func _draw():
 	var step = 0
 	for i in range(0,8):
-		draw_line(Vector2(0,step),Vector2(512,step),Color.WHITE,-1,false)
-		draw_line(Vector2(step,0),Vector2(step,512),Color.WHITE,-1,false)
+		draw_line(Vector2(0,step),Vector2(Global.MAPSIZE,step),Color.WHITE,-1,false)
+		draw_line(Vector2(step,0),Vector2(step,Global.MAPSIZE),Color.WHITE,-1,false)
 		step += 64

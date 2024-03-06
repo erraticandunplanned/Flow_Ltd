@@ -23,10 +23,10 @@ func _ready():
 	)
 	meshdata[ArrayMesh.ARRAY_COLOR] = PackedColorArray(
 		[
-			Color.SLATE_GRAY,
-			Color.SLATE_GRAY,
-			Color.SLATE_GRAY,
-			Color.SLATE_GRAY
+			Color.BLACK,
+			Color.BLACK,
+			Color.BLACK,
+			Color.BLACK
 		]
 	)
 	

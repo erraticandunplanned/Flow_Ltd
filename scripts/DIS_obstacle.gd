@@ -58,7 +58,7 @@ func _on_clock_update(t):
 	var is_valid = true
 	
 	## CANNOT GO OUTSIDE THE GRID
-	if check_pos.x > 512 or check_pos.x < 0 or check_pos.y > 512 or check_pos.y < 0: is_valid = false
+	if check_pos.x > Global.MAPSIZE or check_pos.x < 0 or check_pos.y > Global.MAPSIZE or check_pos.y < 0: is_valid = false
 	
 	## CANNOT MOVE INTO FLOW LINES
 	var flow_lines = get_parent().get_parent().flow_dict
