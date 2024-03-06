@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc4lv5fchhxgc"]
+
+[ext_resource type="Script" path="res://scripts/gridtile.gd" id="1_p6vt2"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_j3b7g"]
+_surfaces = [{
+"2d": true,
+"aabb": AABB(-32, -32, 0, 64, 64, 0),
+"attribute_data": PackedByteArray(112, 128, 144, 255, 112, 128, 144, 255, 112, 128, 144, 255, 112, 128, 144, 255),
+"format": 34393296905,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 2, 0, 3, 0, 0, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 194, 0, 0, 0, 194, 0, 0, 0, 66, 0, 0, 0, 194, 0, 0, 0, 66, 0, 0, 0, 66, 0, 0, 0, 194, 0, 0, 0, 66)
+}]
+
+[node name="Gridtile" type="Node2D"]
+script = ExtResource("1_p6vt2")
+
+[node name="square" type="MeshInstance2D" parent="."]
+mesh = SubResource("ArrayMesh_j3b7g")

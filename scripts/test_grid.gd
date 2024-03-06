@@ -1,7 +1,6 @@
 extends Node2D
 
-@onready var gridtile = preload("res://textures/grid.png")
-@onready var gridtile_black = preload("res://textures/grid_blank.png")
+@onready var gridtile = preload("res://scenes/gridtile.tscn")
 @onready var gridcontainer = $grid_container
 @onready var flowcontainer = $flow_container
 @onready var obstaclecontainer = $obstacle_container
@@ -11,6 +10,8 @@ extends Node2D
 @onready var cursor_clock = $cursor_clock
 
 @onready var DIS = preload("res://scenes/DIS_obstacle.tscn")
+@onready var DIV = preload("res://scenes/DIV_obstacle.tscn")
+@onready var DEV = preload("res://scenes/DEV_obstacle.tscn")
 
 const MAPSIZE = Vector2(512,512)
 
@@ -34,33 +35,35 @@ var goal_dict = {
 	Color.LIGHT_GREEN: Vector2(96,96)
 }
 var obstacle_dict = {
-	0: [Vector2(32,416)]
+	0: [Vector2(32,416)],
+	1: [Vector2(32,96)],
+	2: []
 }
 
 func _ready():
 	## PLACE MAP TILES
 	for i in range(0,8):
 		for j in range(0,8):
-			var newtile = Sprite2D.new()
-			
-			## "FLOWABLE" TILES PLACED AS GRID, NON-"FLOWABLE" TILES PLACED AS OBSTACLES
-			#if i > 0 and i < 7 and j > 2 and j < 5: 
-			if true:
-				gridcontainer.add_child(newtile)
-				newtile.texture = gridtile
-			#else: 
-			#	obstaclecontainer.add_child(newtile)
-			#	newtile.texture = gridtile_black
-			
+			var newtile = gridtile.instantiate()
 			newtile.name = str(i) + "," + str(j)
 			newtile.global_position = Vector2(i * 64 + 32, j * 64 + 32)
 	
 	## PLACE OBSTACLES
-	for i in obstacle_dict.keys():
-		for j in obstacle_dict.get(i):
-			var new_DIS = DIS.instantiate()
-			obstaclecontainer.add_child(new_DIS)
-			new_DIS.global_position = j
+	for i in obstacle_dict.get(0):
+		var new_DIS = DIS.instantiate()
+		obstaclecontainer.add_child(new_DIS)
+		new_DIS.global_position = i
+		new_DIS.name = "DIS"
+	for i in obstacle_dict.get(1):
+		var new_DIV = DIV.instantiate()
+		obstaclecontainer.add_child(new_DIV)
+		new_DIV.name = "DIV"
+		new_DIV.global_position = i
+	for i in obstacle_dict.get(2):
+		var new_DEV = DEV.instantiate()
+		obstaclecontainer.add_child(new_DEV)
+		new_DEV.name = "DEV"
+		new_DEV.global_position = i
 	
 	## PLACE INITIAL "FLOW DOTS" ONTO GRID BASED ON "flow_dict" DICTIONARY
 	for f in flow_dict.keys():
@@ -151,5 +154,14 @@ func _process(delta):
 			if goal_dict.get(g) != last_pos: success = false
 		else: success = false
 	
+	queue_redraw()
 	if success == true:
 		print("Win!")
+
+## DRAW GRID LINES
+func _draw():
+	var step = 0
+	for i in range(0,8):
+		draw_line(Vector2(0,step),Vector2(512,step),Color.WHITE,-1,false)
+		draw_line(Vector2(step,0),Vector2(step,512),Color.WHITE,-1,false)
+		step += 64

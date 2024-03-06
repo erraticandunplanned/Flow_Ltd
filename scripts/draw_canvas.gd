@@ -1,6 +1,5 @@
 extends Node2D
 
-## BUG: LINES AND CIRCLES ARE CURRENTLY SHARED BY ALL NODES. UPDATE TO A DICTIONARY
 var lines = []
 var circles = []
 var flow_nodes = []
