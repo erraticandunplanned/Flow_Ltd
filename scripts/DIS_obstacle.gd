@@ -15,15 +15,15 @@ func _ready():
 	
 	meshdata[ArrayMesh.ARRAY_VERTEX] = PackedVector2Array(
 		[
-			Vector2(-16,0),
-			Vector2(-16,-32),
-			Vector2(16,-32),
-			Vector2(16,0),
+			Vector2(-28,0),
+			Vector2(-28,-28),
+			Vector2(28,-28),
+			Vector2(28,0),
 			
-			Vector2(-16,0),
-			Vector2(16,0),
-			Vector2(16,32),
-			Vector2(-16,32)
+			Vector2(-28,0),
+			Vector2(28,0),
+			Vector2(28,28),
+			Vector2(-28,28)
 		]
 	)
 	meshdata[ArrayMesh.ARRAY_INDEX] = PackedInt32Array(
@@ -53,6 +53,11 @@ func _ready():
 	var world = get_parent().get_parent()
 	world.connect("clock_update", _on_clock_update)
 
+func rotation_setup(dir : Vector2):
+	facing = dir
+	var angle = dir.angle() + PI/2
+	rotate(angle)
+
 func _on_clock_update(_t):
 	## CHECK FOR VALID POSITION
 	var check_pos = global_position + ( facing * 64 )
@@ -67,6 +72,12 @@ func _on_clock_update(_t):
 		var array = flow_lines.get(k)
 		for i in array:
 			if check_pos == i: is_valid = false
+	
+	## CANNOT MOVE INTO FLOW GOALS
+	var goal_locations = get_parent().get_parent().goal_dict
+	for k in goal_locations.keys():
+		var location = goal_locations.get(k)
+		if check_pos == location: is_valid = false
 	
 	## CANNOT MOVE INTO OTHER OBSTACLES
 	for o in get_parent().get_children():

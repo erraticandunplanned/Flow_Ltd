@@ -34,13 +34,15 @@ func _ready():
 	for i in obstacle_dict.get(1):
 		var new_DIS = DIS.instantiate()
 		obstaclecontainer.add_child(new_DIS)
-		new_DIS.global_position = i
+		new_DIS.global_position = i[0]
+		new_DIS.rotation_setup(i[1])
 		new_DIS.name = "DIS"
 	for i in obstacle_dict.get(2):
 		var new_DIV = DIV.instantiate()
 		obstaclecontainer.add_child(new_DIV)
+		new_DIV.global_position = i[0]
+		new_DIV.rotation_setup(i[1])
 		new_DIV.name = "DIV"
-		new_DIV.global_position = i
 	for i in obstacle_dict.get(3):
 		var new_DEV = DEV.instantiate()
 		obstaclecontainer.add_child(new_DEV)

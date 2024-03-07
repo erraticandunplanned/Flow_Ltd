@@ -24,6 +24,7 @@ func _draw():
 
 func update_goals(g):
 	@warning_ignore("unused_variable")
+	goals.clear()
 	var goal_dict : Dictionary = g
 	for key_color in g.keys():
 		var location = g.get(key_color)

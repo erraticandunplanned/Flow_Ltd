@@ -72,20 +72,20 @@ var levels = {
 	2: {
 		flow_dictionary: {
 			Color.WHITE_SMOKE: [Vector2(96,288)],
-			Color.LIGHT_CORAL: [Vector2(96,224)],
+			Color.LIGHT_CORAL: [Vector2(96,160)],
 			Color.MEDIUM_AQUAMARINE: [Vector2(480,32)],
 			Color.LIGHT_GREEN: [Vector2(288,416)]
 		},
 		goal_dictionary: {
 			Color.WHITE_SMOKE: Vector2(416,288),
 			Color.LIGHT_CORAL: Vector2(416,224),
-			Color.MEDIUM_AQUAMARINE: Vector2(480,480),
+			Color.MEDIUM_AQUAMARINE: Vector2(416,480),
 			Color.LIGHT_GREEN: Vector2(96,96)
 		},
 		obstacle_dictionary: {
-			ob_grid: [Vector2(96,32)],
-			ob_DIS: [Vector2(480,416)],
-			ob_DIV: [Vector2(32,96)],
+			ob_grid: [Vector2(32,32),Vector2(96,32),Vector2(32,480)],
+			ob_DIS: [[Vector2(32,160),Vector2.DOWN],[Vector2(288,352),Vector2.RIGHT]],
+			ob_DIV: [[Vector2(480,416),Vector2.UP]],
 			ob_DEV: []
 		}
 	}

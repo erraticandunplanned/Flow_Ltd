@@ -16,12 +16,12 @@ func _ready():
 	
 	meshdata[ArrayMesh.ARRAY_VERTEX] = PackedVector2Array(
 		[
-			Vector2(-32,0),
-			Vector2(32,0),
-			Vector2(0,-32),
-			Vector2(-32,0),
-			Vector2(32,0),
-			Vector2(0,32)
+			Vector2(-28,0),
+			Vector2(28,0),
+			Vector2(0,-28),
+			Vector2(-28,0),
+			Vector2(28,0),
+			Vector2(0,28)
 		]
 	)
 	meshdata[ArrayMesh.ARRAY_INDEX] = PackedInt32Array(
@@ -47,6 +47,11 @@ func _ready():
 	var world = get_parent().get_parent()
 	world.connect("clock_update", _on_clock_update)
 
+func rotation_setup(dir : Vector2):
+	facing = dir
+	var angle = dir.angle() + PI/2
+	rotate(angle)
+
 func _on_clock_update(_t):
 	## CHECK FOR VALID POSITION
 	var check_pos = global_position + ( facing * 64 )
@@ -61,6 +66,25 @@ func _on_clock_update(_t):
 		var array = flow_lines.get(k)
 		for i in array:
 			if check_pos == i: is_valid = false
+		
+		## HOWEVER, DESTROYS FLOW NODES ON CONTACT
+		if check_pos == array.back():
+			flow_lines.erase(k)
+			print("flow node destroyed!")
+			var canvas = get_parent().get_parent().find_child("draw_canvas")
+			canvas.update_flow(flow_lines)
+			is_valid = true
+	
+	## DESTROYS FLOW GOALS
+	var goal_locations = get_parent().get_parent().goal_dict
+	for k in goal_locations.keys():
+		var location = goal_locations.get(k)
+		if check_pos == location: 
+			goal_locations.erase(k)
+			print("flow goal destroyed!")
+			var canvas = get_parent().get_parent().find_child("draw_canvas")
+			canvas.update_goals(goal_locations)
+			is_valid = true
 	
 	## CANNOT MOVE INTO OTHER OBSTACLES
 	for o in get_parent().get_children():
