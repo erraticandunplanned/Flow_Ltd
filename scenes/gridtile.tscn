@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/gridtile.gd" id="1_p6vt2"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_cow5s"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_swdes"]
 _surfaces = [{
 "2d": true,
 "aabb": AABB(-32, -32, 0, 64, 64, 0),
@@ -20,4 +20,4 @@ _surfaces = [{
 script = ExtResource("1_p6vt2")
 
 [node name="square" type="MeshInstance2D" parent="."]
-mesh = SubResource("ArrayMesh_cow5s")
+mesh = SubResource("ArrayMesh_swdes")

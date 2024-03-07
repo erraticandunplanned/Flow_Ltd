@@ -17,9 +17,9 @@ func _ready():
 	for shutter in [bottom_shutter,left_shutter,right_shutter,top_shutter]:
 		var meshdata = []
 		meshdata.resize(ArrayMesh.ARRAY_MAX)
-		meshdata[ArrayMesh.ARRAY_VERTEX] = PackedVector2Array([Vector2(-256,-256),Vector2(256,-256),Vector2(256,256),Vector2(-256,256),])
-		meshdata[ArrayMesh.ARRAY_INDEX] = PackedInt32Array([0,1,2,2,3,0,])
-		meshdata[ArrayMesh.ARRAY_COLOR] = PackedColorArray([Color.BLACK,Color.BLACK,Color.BLACK,Color.BLACK,])
+		meshdata[ArrayMesh.ARRAY_VERTEX] = PackedVector2Array([Vector2(0,0),Vector2(Global.MAPSIZE,0),Vector2(Global.MAPSIZE,Global.MAPSIZE),Vector2(0,Global.MAPSIZE)])
+		meshdata[ArrayMesh.ARRAY_INDEX] = PackedInt32Array([0,1,2,2,3,0])
+		meshdata[ArrayMesh.ARRAY_COLOR] = PackedColorArray([Color.DARK_SLATE_BLUE,Color.DARK_SLATE_BLUE,Color.DARK_SLATE_BLUE,Color.DARK_SLATE_BLUE])
 		shutter.mesh = ArrayMesh.new()
 		shutter.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, meshdata)
 	reset_shutters()
@@ -27,10 +27,10 @@ func _ready():
 
 func reset_shutters():
 	transition_node.global_position = Vector2(0,0)
-	bottom_shutter.global_position = Vector2(768,1280)
-	left_shutter.global_position = Vector2(-768,768)
-	right_shutter.global_position = Vector2(1280,768)
-	top_shutter.global_position = Vector2(768,-768)
+	bottom_shutter.global_position = Vector2(0,Global.MAPSIZE*2-32)
+	left_shutter.global_position = Vector2(-Global.MAPSIZE*2+32,0)
+	right_shutter.global_position = Vector2(Global.MAPSIZE*2-32,0)
+	top_shutter.global_position = Vector2(0,-Global.MAPSIZE*2+32)
 
 func load_scene():
 	current_scene = basic_scene.instantiate()
@@ -40,7 +40,8 @@ func load_scene():
 func advance_level(location):
 	print("Win!")
 	transition_node.global_position += Vector2(-256,-256)
-	loading = true
+	transition_node.global_position += location.global_position
+	#loading = true
 	current_scene.queue_free()
 	Global.current_level += 1
 	if Global.current_level < 3: load_scene()
@@ -49,14 +50,13 @@ func _process(delta):
 	if not loading: return
 	
 	loading_time += delta
-	print(loading_time)
-	if loading_time > 0.25:
+	if loading_time > 0.1:
 		bottom_shutter.global_position.y += -64
 		left_shutter.global_position.x += 64
 		right_shutter.global_position.x += -64
 		top_shutter.global_position.y += 64
 		loading_time = 0
-	if bottom_shutter.global_position.y <= -128: 
+	if abs(bottom_shutter.global_position.y - top_shutter.global_position.y) + 128 <= Global.MAPSIZE: 
 		loading = false
 		loading_time = 0
 		reset_shutters()

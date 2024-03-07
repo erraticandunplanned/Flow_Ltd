@@ -7,6 +7,7 @@ extends Node2D
 
 @onready var mesh_node : MeshInstance2D = $shape
 
+var next_pos = Vector2.ZERO
 var facing = Vector2.UP
 
 func _ready():
@@ -63,8 +64,12 @@ func _on_clock_update(_t):
 	
 	## CANNOT MOVE INTO OTHER OBSTACLES
 	for o in get_parent().get_children():
-		if o.global_position == global_position: continue
 		if o.global_position == check_pos: is_valid = false
+		
+		## IF TWO OBSTACLES MOVE INTO THE SAME SPOT IN A SINGLE TURN, BOTH ARE DESTROYED
+		if o.global_position == next_pos: 
+			queue_free()
+			o.queue_free()
 	
 	## MOVE IF VALID. STOP AND ROTATE IF NOT. 
 	if not is_valid:
@@ -72,3 +77,7 @@ func _on_clock_update(_t):
 		facing = facing * -1
 		global_rotation += PI
 	global_position = check_pos
+	
+	next_pos = global_position + ( facing * 64 )
+	for o in get_parent().get_children():
+		if o.global_position == next_pos: next_pos = Vector2.ZERO

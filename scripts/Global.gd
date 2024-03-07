@@ -2,7 +2,7 @@ extends Node
 
 const MAPSIZE = 512
 
-var current_level = 0
+var current_level = 2
 var completion = {
 	0: true,
 	1: false,
@@ -84,7 +84,7 @@ var levels = {
 		},
 		obstacle_dictionary: {
 			ob_grid: [Vector2(96,32)],
-			ob_DIS: [Vector2(32,416)],
+			ob_DIS: [Vector2(480,416)],
 			ob_DIV: [Vector2(32,96)],
 			ob_DEV: []
 		}
