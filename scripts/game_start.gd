@@ -51,5 +51,13 @@ func reset_level():
 func advance_level(location):
 	current_scene.queue_free()
 	Global.current_level += 1
-	if Global.levels.has(Global.current_level): 
+	for i in range(0,36):
+		if not Global.levels.has(Global.current_level):
+			print("skipping 1 level")
+			Global.current_level += 1
+		else: break
+	
+	if Global.levels.has(Global.current_level):
 		load_level()
+	else:
+		print("Houston, we've run out of levels.")
