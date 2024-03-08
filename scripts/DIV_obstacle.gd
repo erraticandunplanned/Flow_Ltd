@@ -10,6 +10,8 @@ extends Node2D
 var next_pos = Vector2.ZERO
 var facing = Vector2.UP
 
+signal collision(pos)
+
 func _ready():
 	var meshdata = []
 	meshdata.resize(ArrayMesh.ARRAY_MAX)
@@ -70,9 +72,9 @@ func _on_clock_update(_t):
 		## HOWEVER, DESTROYS FLOW NODES ON CONTACT
 		if check_pos == array.back():
 			flow_lines.erase(k)
-			print("flow node destroyed!")
 			var canvas = get_parent().get_parent().find_child("draw_canvas")
 			canvas.update_flow(flow_lines)
+			emit_signal("collision", check_pos)
 			is_valid = true
 	
 	## DESTROYS FLOW GOALS
@@ -81,9 +83,9 @@ func _on_clock_update(_t):
 		var location = goal_locations.get(k)
 		if check_pos == location: 
 			goal_locations.erase(k)
-			print("flow goal destroyed!")
 			var canvas = get_parent().get_parent().find_child("draw_canvas")
 			canvas.update_goals(goal_locations)
+			emit_signal("collision", check_pos)
 			is_valid = true
 	
 	## CANNOT MOVE INTO OTHER OBSTACLES
@@ -92,6 +94,7 @@ func _on_clock_update(_t):
 		
 		## IF TWO OBSTACLES MOVE INTO THE SAME SPOT IN A SINGLE TURN, BOTH ARE DESTROYED
 		if o.global_position == next_pos: 
+			emit_signal("collision", next_pos)
 			queue_free()
 			o.queue_free()
 	

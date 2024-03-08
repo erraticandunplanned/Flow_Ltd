@@ -13,6 +13,8 @@ extends Node2D
 @onready var DIV = preload("res://scenes/DIV_obstacle.tscn")
 @onready var DEV = preload("res://scenes/DEV_obstacle.tscn")
 
+@onready var collision_image = preload("res://scenes/collision.tscn")
+
 var time = 0
 var current_flow_node : Node
 var current_flow_color : Color
@@ -49,6 +51,10 @@ func _ready():
 		new_DEV.name = "DEV"
 		new_DEV.global_position = i
 	
+	## CONNECT COLLISION SIGNALS
+	for o in obstaclecontainer.get_children():
+		o.connect("collision", _on_collision)
+	
 	## PLACE INITIAL "FLOW DOTS" ONTO GRID BASED ON "flow_dict" DICTIONARY
 	for f in flow_dict.keys():
 		var new_flow = Node2D.new()
@@ -84,7 +90,7 @@ func _process(_delta):
 	cursor_snap.global_position = Vector2(clamp(floor(mousepos.x / 64) * 64 + 32, 32, Global.MAPSIZE - 32), clamp(floor(mousepos.y / 64) * 64 + 32, 32, Global.MAPSIZE - 32))
 	
 	## MOST OF THIS FUNCTION ONLY CALLS IF THE MOUSE IS HOLDING A FLOW CIRCLE
-	if current_flow_node != null:
+	if current_flow_node != null and flow_dict.has(current_flow_color):
 		
 		## SET "CURSOR_CLOCK" TO ONLY VALID TILES
 		var is_valid = true
@@ -142,6 +148,11 @@ func _process(_delta):
 	queue_redraw()
 	if success == true:
 		get_parent().get_parent().advance_level(cursor_clock)
+
+func _on_collision(pos):
+	var col = collision_image.instantiate()
+	canvas.add_child(col)
+	col.global_position = pos
 
 ## DRAW GRID LINES
 func _draw():

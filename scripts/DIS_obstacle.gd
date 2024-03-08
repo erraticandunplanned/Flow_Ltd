@@ -9,6 +9,8 @@ extends Node2D
 var next_pos = Vector2.ZERO
 var facing = Vector2.UP
 
+signal collision(pos)
+
 func _ready():
 	var meshdata = []
 	meshdata.resize(ArrayMesh.ARRAY_MAX)
@@ -85,6 +87,7 @@ func _on_clock_update(_t):
 		
 		## IF TWO OBSTACLES MOVE INTO THE SAME SPOT IN A SINGLE TURN, BOTH ARE DESTROYED
 		if o.global_position == next_pos: 
+			emit_signal("collision", next_pos)
 			queue_free()
 			o.queue_free()
 	
