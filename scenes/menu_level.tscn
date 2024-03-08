@@ -1,0 +1,1018 @@
+[gd_scene load_steps=6 format=3 uid="uid://g40rve8c1wwg"]
+
+[ext_resource type="Script" path="res://scripts/menu_level.gd" id="1_7eomg"]
+[ext_resource type="Script" path="res://scripts/draw_canvas.gd" id="2_m4ij0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ucs3q"]
+font_size = 11
+
+[sub_resource type="LabelSettings" id="LabelSettings_m38sa"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_37pf4"]
+outline_size = 4
+outline_color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="MenuLevel" type="Node2D"]
+script = ExtResource("1_7eomg")
+
+[node name="background" type="MeshInstance2D" parent="."]
+
+[node name="grid_container" type="Node2D" parent="."]
+
+[node name="obstacle_container" type="Node2D" parent="."]
+
+[node name="draw_canvas" type="Node2D" parent="."]
+script = ExtResource("2_m4ij0")
+
+[node name="flow_container" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 1
+
+[node name="reset_button" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+flat = true
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="vert" type="VSplitContainer" parent="CanvasLayer/Control/CenterContainer"]
+layout_mode = 2
+mouse_filter = 2
+dragger_visibility = 2
+
+[node name="Clock" type="Label" parent="CanvasLayer/Control/CenterContainer/vert"]
+layout_mode = 2
+text = "0 | 0"
+
+[node name="reset_text" type="Label" parent="CanvasLayer/Control/CenterContainer/vert"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_ucs3q")
+
+[node name="corner" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -448.0
+offset_bottom = 64.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/corner"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/corner/CenterContainer"]
+layout_mode = 2
+text = "FLOW LTD"
+label_settings = SubResource("LabelSettings_m38sa")
+
+[node name="Labels" type="CanvasLayer" parent="."]
+
+[node name="main_menu" type="Control" parent="Labels"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PLAY" type="Control" parent="Labels/main_menu"]
+anchors_preset = 0
+offset_left = 384.0
+offset_top = 256.0
+offset_right = 448.0
+offset_bottom = 320.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/main_menu/PLAY"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/main_menu/PLAY/CenterContainer"]
+layout_mode = 2
+text = "PLAY"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="LEVELS" type="Control" parent="Labels/main_menu"]
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 256.0
+offset_right = 192.0
+offset_bottom = 320.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/main_menu/LEVELS"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/main_menu/LEVELS/CenterContainer"]
+layout_mode = 2
+text = "LEVEL
+SELECT"
+label_settings = SubResource("LabelSettings_37pf4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QUIT" type="Control" parent="Labels/main_menu"]
+anchors_preset = 0
+offset_left = 256.0
+offset_top = 384.0
+offset_right = 320.0
+offset_bottom = 448.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/main_menu/QUIT"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/main_menu/QUIT/CenterContainer"]
+layout_mode = 2
+text = "QUIT"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="level_select" type="Control" parent="Labels"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Back" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 128.0
+offset_right = 64.0
+offset_bottom = 192.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/Back"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/Back/CenterContainer"]
+layout_mode = 2
+text = "BACK"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="1" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 128.0
+offset_bottom = 128.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/1/CenterContainer"]
+layout_mode = 2
+text = "1"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="2" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 192.0
+offset_bottom = 128.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/2/CenterContainer"]
+layout_mode = 2
+text = "2"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="3" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 192.0
+offset_top = 64.0
+offset_right = 256.0
+offset_bottom = 128.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/3/CenterContainer"]
+layout_mode = 2
+text = "3"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="4" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 256.0
+offset_top = 64.0
+offset_right = 320.0
+offset_bottom = 128.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/4/CenterContainer"]
+layout_mode = 2
+text = "4
+"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="5" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 64.0
+offset_right = 384.0
+offset_bottom = 128.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/5/CenterContainer"]
+layout_mode = 2
+text = "5
+"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="6" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 384.0
+offset_top = 64.0
+offset_right = 448.0
+offset_bottom = 128.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/6/CenterContainer"]
+layout_mode = 2
+text = "6
+"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="7" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 64.0
+offset_top = 128.0
+offset_right = 128.0
+offset_bottom = 192.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/7/CenterContainer"]
+layout_mode = 2
+text = "7"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="8" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 192.0
+offset_bottom = 192.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/8/CenterContainer"]
+layout_mode = 2
+text = "8"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="9" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 192.0
+offset_top = 128.0
+offset_right = 256.0
+offset_bottom = 192.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/9"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/9/CenterContainer"]
+layout_mode = 2
+text = "9"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="10" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 256.0
+offset_top = 128.0
+offset_right = 320.0
+offset_bottom = 192.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/10"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/10/CenterContainer"]
+layout_mode = 2
+text = "10"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="11" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 128.0
+offset_right = 384.0
+offset_bottom = 192.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/11"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/11/CenterContainer"]
+layout_mode = 2
+text = "11"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="12" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 384.0
+offset_top = 128.0
+offset_right = 448.0
+offset_bottom = 192.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/12"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/12/CenterContainer"]
+layout_mode = 2
+text = "12"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="13" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 64.0
+offset_top = 192.0
+offset_right = 128.0
+offset_bottom = 256.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/13"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/13/CenterContainer"]
+layout_mode = 2
+text = "13"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="14" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 192.0
+offset_right = 192.0
+offset_bottom = 256.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/14"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/14/CenterContainer"]
+layout_mode = 2
+text = "14"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="15" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 192.0
+offset_top = 192.0
+offset_right = 256.0
+offset_bottom = 256.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/15"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/15/CenterContainer"]
+layout_mode = 2
+text = "15"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="16" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 256.0
+offset_top = 192.0
+offset_right = 320.0
+offset_bottom = 256.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/16"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/16/CenterContainer"]
+layout_mode = 2
+text = "16"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="17" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 192.0
+offset_right = 384.0
+offset_bottom = 256.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/17"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/17/CenterContainer"]
+layout_mode = 2
+text = "17
+"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="18" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 384.0
+offset_top = 192.0
+offset_right = 448.0
+offset_bottom = 256.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/18"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/18/CenterContainer"]
+layout_mode = 2
+text = "18
+"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="19" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 64.0
+offset_top = 256.0
+offset_right = 128.0
+offset_bottom = 320.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/19"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/19/CenterContainer"]
+layout_mode = 2
+text = "19"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="20" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 256.0
+offset_right = 192.0
+offset_bottom = 320.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/20"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/20/CenterContainer"]
+layout_mode = 2
+text = "20"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="21" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 192.0
+offset_top = 256.0
+offset_right = 256.0
+offset_bottom = 320.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/21"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/21/CenterContainer"]
+layout_mode = 2
+text = "21"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="22" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 256.0
+offset_top = 256.0
+offset_right = 320.0
+offset_bottom = 320.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/22"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/22/CenterContainer"]
+layout_mode = 2
+text = "22"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="23" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 256.0
+offset_right = 384.0
+offset_bottom = 320.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/23"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/23/CenterContainer"]
+layout_mode = 2
+text = "23"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="24" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 384.0
+offset_top = 256.0
+offset_right = 448.0
+offset_bottom = 320.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/24"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/24/CenterContainer"]
+layout_mode = 2
+text = "24"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="25" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 64.0
+offset_top = 320.0
+offset_right = 128.0
+offset_bottom = 384.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/25"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/25/CenterContainer"]
+layout_mode = 2
+text = "25"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="26" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 320.0
+offset_right = 192.0
+offset_bottom = 384.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/26"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/26/CenterContainer"]
+layout_mode = 2
+text = "26"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="27" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 192.0
+offset_top = 320.0
+offset_right = 256.0
+offset_bottom = 384.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/27"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/27/CenterContainer"]
+layout_mode = 2
+text = "27"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="28" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 256.0
+offset_top = 320.0
+offset_right = 320.0
+offset_bottom = 384.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/28"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/28/CenterContainer"]
+layout_mode = 2
+text = "28"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="29" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 320.0
+offset_right = 384.0
+offset_bottom = 384.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/29"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/29/CenterContainer"]
+layout_mode = 2
+text = "29
+"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="30" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 384.0
+offset_top = 320.0
+offset_right = 448.0
+offset_bottom = 384.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/30"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/30/CenterContainer"]
+layout_mode = 2
+text = "30"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="31" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 64.0
+offset_top = 384.0
+offset_right = 128.0
+offset_bottom = 448.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/31"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/31/CenterContainer"]
+layout_mode = 2
+text = "31"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="32" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 384.0
+offset_right = 192.0
+offset_bottom = 448.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/32"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/32/CenterContainer"]
+layout_mode = 2
+text = "32"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="33" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 192.0
+offset_top = 384.0
+offset_right = 256.0
+offset_bottom = 448.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/33"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/33/CenterContainer"]
+layout_mode = 2
+text = "33"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="34" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 256.0
+offset_top = 384.0
+offset_right = 320.0
+offset_bottom = 448.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/34"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/34/CenterContainer"]
+layout_mode = 2
+text = "34"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="35" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 384.0
+offset_right = 384.0
+offset_bottom = 448.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/35"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/35/CenterContainer"]
+layout_mode = 2
+text = "35"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="36" type="Control" parent="Labels/level_select"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 384.0
+offset_top = 384.0
+offset_right = 448.0
+offset_bottom = 448.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/level_select/36"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/level_select/36/CenterContainer"]
+layout_mode = 2
+text = "36"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="settings" type="Control" parent="Labels"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="cursor_snap" type="Node2D" parent="."]
+modulate = Color(0.853352, 0.342064, 0.394375, 1)
+scale = Vector2(0.25, 0.25)
+
+[node name="cursor_clock" type="Node2D" parent="."]
+modulate = Color(0.853352, 0.342064, 0.394375, 1)
+scale = Vector2(0.25, 0.25)
+
+[connection signal="pressed" from="CanvasLayer/Control/reset_button" to="." method="_on_reset_button_pressed"]
