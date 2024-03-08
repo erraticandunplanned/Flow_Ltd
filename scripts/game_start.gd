@@ -37,14 +37,17 @@ func load_scene():
 	current_scene.name = str("level ", Global.current_level)
 	level_loader.add_child(current_scene)
 
+func reset_level():
+	current_scene.queue_free()
+	current_scene = basic_scene.instantiate()
+	current_scene.name = str("level ", Global.current_level)
+	level_loader.add_child(current_scene)
+
 func advance_level(location):
-	print("Win!")
-	transition_node.global_position += Vector2(-256,-256)
-	transition_node.global_position += location.global_position
-	#loading = true
 	current_scene.queue_free()
 	Global.current_level += 1
-	if Global.current_level < 3: load_scene()
+	if Global.levels.has(Global.current_level): 
+		load_scene()
 
 func _process(delta):
 	if not loading: return

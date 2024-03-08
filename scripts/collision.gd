@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 
 @onready var mesh_node : MeshInstance2D = $shape

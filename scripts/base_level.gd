@@ -4,7 +4,7 @@ extends Node2D
 @onready var flowcontainer = $flow_container
 @onready var obstaclecontainer = $obstacle_container
 @onready var canvas = $draw_canvas
-@onready var clock = $CanvasLayer/Control/TextEdit
+@onready var clock = $CanvasLayer/Control/vert/Clock
 @onready var cursor_snap = $cursor_snap
 @onready var cursor_clock = $cursor_clock
 
@@ -22,11 +22,15 @@ var success = false
 
 signal clock_update(time)
 
-var flow_dict = Global.levels.get(Global.current_level).get(Global.flow_dictionary)
-var goal_dict = Global.levels.get(Global.current_level).get(Global.goal_dictionary)
-var obstacle_dict = Global.levels.get(Global.current_level).get(Global.obstacle_dictionary)
+var flow_dict = Global.levels.get(Global.current_level).get(Global.flow_dictionary).duplicate(true)
+var goal_dict = Global.levels.get(Global.current_level).get(Global.goal_dictionary).duplicate(true)
+var obstacle_dict = Global.levels.get(Global.current_level).get(Global.obstacle_dictionary).duplicate(true)
 
 func _ready():
+	## UPDATE CLOCK
+	var text = str(Global.current_level) + " | " + str(time)
+	clock.text = text
+	
 	## PLACE OBSTACLES
 	for i in obstacle_dict.get(0):
 		var new_grid = gridtile.instantiate()
@@ -53,7 +57,8 @@ func _ready():
 	
 	## CONNECT COLLISION SIGNALS
 	for o in obstaclecontainer.get_children():
-		o.connect("collision", _on_collision)
+		if o.name.begins_with("D"):
+			o.connect("collision", _on_collision)
 	
 	## PLACE INITIAL "FLOW DOTS" ONTO GRID BASED ON "flow_dict" DICTIONARY
 	for f in flow_dict.keys():
@@ -132,7 +137,7 @@ func _process(_delta):
 			
 			## ADVANCE CLOCK
 			time += 1
-			var text = str(time)
+			var text = str(Global.current_level) + " | " + str(time)
 			clock.text = text
 			emit_signal("clock_update", time)
 	
@@ -153,6 +158,9 @@ func _on_collision(pos):
 	var col = collision_image.instantiate()
 	canvas.add_child(col)
 	col.global_position = pos
+
+func _on_reset_button_pressed():
+	get_parent().get_parent().reset_level()
 
 ## DRAW GRID LINES
 func _draw():

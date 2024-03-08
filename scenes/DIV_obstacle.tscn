@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://scripts/DIV_obstacle.gd" id="1_uhqbn"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_dj6p4"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ru1np"]
 _surfaces = [{
 "2d": true,
-"aabb": AABB(-32, -32, 0, 64, 64, 0),
+"aabb": AABB(-28, -28, 0, 56, 56, 0),
 "attribute_data": PackedByteArray(175, 238, 238, 255, 175, 238, 238, 255, 175, 238, 238, 255, 255, 105, 180, 255, 255, 105, 180, 255, 255, 105, 180, 255),
 "format": 34393296905,
 "index_count": 6,
@@ -13,11 +13,11 @@ _surfaces = [{
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
 "vertex_count": 6,
-"vertex_data": PackedByteArray(0, 0, 0, 194, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 194, 0, 0, 0, 194, 0, 0, 0, 0, 0, 0, 0, 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 66)
+"vertex_data": PackedByteArray(0, 0, 224, 193, 0, 0, 0, 0, 0, 0, 224, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 193, 0, 0, 224, 193, 0, 0, 0, 0, 0, 0, 224, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 65)
 }]
 
 [node name="DivObstacle" type="Node2D"]
 script = ExtResource("1_uhqbn")
 
 [node name="shape" type="MeshInstance2D" parent="."]
-mesh = SubResource("ArrayMesh_dj6p4")
+mesh = SubResource("ArrayMesh_ru1np")

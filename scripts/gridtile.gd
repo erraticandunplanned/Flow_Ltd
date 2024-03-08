@@ -21,14 +21,11 @@ func _ready():
 			2,3,0,
 		]
 	)
-	meshdata[ArrayMesh.ARRAY_COLOR] = PackedColorArray(
-		[
-			Color.BLACK,
-			Color.BLACK,
-			Color.BLACK,
-			Color.BLACK
-		]
-	)
+	var color_array = []
+	color_array.resize(meshdata[ArrayMesh.ARRAY_VERTEX].size())
+	for i in range(0,color_array.size()):
+		color_array[i] = Color(0.1,0.1,0.1,1)
+	meshdata[ArrayMesh.ARRAY_COLOR] = PackedColorArray(color_array)
 	
 	mesh_node.mesh = ArrayMesh.new()
 	mesh_node.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, meshdata)

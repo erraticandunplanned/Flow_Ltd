@@ -11,7 +11,7 @@ func _process(_delta):
 	queue_redraw()
 
 func _draw():
-	if flow_dict == {}: return
+	#if flow_dict == {}: return
 	
 	for i in lines:
 		draw_line(i[0], i[1], i[2], 32, false)
@@ -23,9 +23,7 @@ func _draw():
 		draw_circle(g[0], 16, g[1])
 
 func update_goals(g):
-	@warning_ignore("unused_variable")
 	goals.clear()
-	var goal_dict : Dictionary = g
 	for key_color in g.keys():
 		var location = g.get(key_color)
 		var new_goal = [location, key_color]
