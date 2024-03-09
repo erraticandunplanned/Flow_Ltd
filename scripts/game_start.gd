@@ -61,4 +61,7 @@ func advance_level(location):
 	if Global.levels.has(Global.current_level):
 		load_level()
 	else:
+		Global.current_level = 0
+		Global.menu = Global.main_menu
+		load_level()
 		print("Houston, we've run out of levels.")
