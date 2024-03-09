@@ -53,7 +53,7 @@ func advance_level(location):
 	Global.current_level += 1
 	for i in range(0,36):
 		if not Global.levels.has(Global.current_level):
-			print("skipping 1 level")
+			print("skipping level ", Global.current_level)
 			Global.current_level += 1
 		else: break
 	
