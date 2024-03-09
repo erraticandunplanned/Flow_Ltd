@@ -95,7 +95,6 @@ label_settings = SubResource("LabelSettings_m38sa")
 [node name="Labels" type="CanvasLayer" parent="."]
 
 [node name="main_menu" type="Control" parent="Labels"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -127,10 +126,10 @@ label_settings = SubResource("LabelSettings_37pf4")
 
 [node name="LEVELS" type="Control" parent="Labels/main_menu"]
 anchors_preset = 0
-offset_left = 128.0
-offset_top = 256.0
-offset_right = 192.0
-offset_bottom = 320.0
+offset_left = 384.0
+offset_top = 192.0
+offset_right = 448.0
+offset_bottom = 256.0
 mouse_filter = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="Labels/main_menu/LEVELS"]
@@ -148,6 +147,27 @@ SELECT"
 label_settings = SubResource("LabelSettings_37pf4")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SETTINGS" type="Control" parent="Labels/main_menu"]
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 256.0
+offset_right = 192.0
+offset_bottom = 320.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/main_menu/SETTINGS"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/main_menu/SETTINGS/CenterContainer"]
+layout_mode = 2
+text = "SETUP"
+label_settings = SubResource("LabelSettings_37pf4")
 
 [node name="QUIT" type="Control" parent="Labels/main_menu"]
 anchors_preset = 0
@@ -171,6 +191,7 @@ text = "QUIT"
 label_settings = SubResource("LabelSettings_37pf4")
 
 [node name="level_select" type="Control" parent="Labels"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

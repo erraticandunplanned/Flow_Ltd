@@ -4,11 +4,45 @@ const MAPSIZE = 512
 
 var current_level = 0
 var menu = main_menu
-var completion = {
-	0: true,
-	1: false,
-	2: false
-}
+var completion = [
+	true,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false,
+	false
+]
 
 enum {
 	main_menu,
@@ -37,7 +71,8 @@ var menu_levels = {
 		goal_dictionary: {
 			Color(0.827451, 0.827451, 0.827450, 1): Vector2(416,288),
 			Color(0.827451, 0.827450, 0.827451, 1): Vector2(288,416),
-			Color(0.827450, 0.827451, 0.827451, 1): Vector2(160,288)
+			Color(0.827450, 0.827451, 0.827451, 1): Vector2(416,224),
+			Color(0.827451, 0.827451, 0.827451, 1): Vector2(160,288),
 		},
 		obstacle_dictionary: {
 			ob_grid: [
@@ -100,6 +135,24 @@ var menu_levels = {
 				Vector2(32,32),Vector2(96,32),Vector2(160,32),Vector2(224,32),Vector2(288,32),Vector2(352,32),Vector2(416,32),Vector2(480,32),
 				Vector2(480,96),
 				Vector2(480,160),
+				Vector2(32,224),Vector2(480,224),
+				Vector2(32,288),Vector2(480,288),
+				Vector2(32,352),Vector2(480,352),
+				Vector2(32,416),Vector2(480,416),
+				Vector2(32,480),Vector2(96,480),Vector2(160,480),Vector2(224,480),Vector2(288,480),Vector2(352,480),Vector2(416,480),Vector2(480,480),
+				],
+		}
+	},
+	settings: {
+		flow_dictionary: {
+			Color.LIGHT_GRAY: [Vector2(32,96)]
+		},
+		goal_dictionary: {},
+		obstacle_dictionary: {
+			ob_grid: [
+				Vector2(32,32),Vector2(96,32),Vector2(160,32),Vector2(224,32),Vector2(288,32),Vector2(352,32),Vector2(416,32),Vector2(480,32),
+				Vector2(480,96),
+				Vector2(32,160),Vector2(480,160),
 				Vector2(32,224),Vector2(480,224),
 				Vector2(32,288),Vector2(480,288),
 				Vector2(32,352),Vector2(480,352),

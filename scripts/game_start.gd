@@ -49,6 +49,7 @@ func reset_level():
 	level_loader.add_child(current_scene)
 
 func advance_level(location):
+	Global.completion[Global.current_level] = true
 	current_scene.queue_free()
 	Global.current_level += 1
 	for i in range(0,36):

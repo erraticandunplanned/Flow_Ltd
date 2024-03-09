@@ -29,27 +29,45 @@ func _ready():
 	var text = str(Global.current_level) + " | " + str(time)
 	clock_text.text = text
 	
-	## SET MENU TEXT
-	if Global.menu == Global.main_menu:
-		menutext_main.visible = true
-		menutext_levels.visible = false
-		menutext_settings.visible = false
-	if Global.menu == Global.level_select:
-		menutext_main.visible = false
-		menutext_levels.visible = true
-		menutext_settings.visible = false
-	if Global.menu == Global.settings:
-		menutext_main.visible = false
-		menutext_levels.visible = false
-		menutext_settings.visible = true
-	
-	
 	## PLACE OBSTACLES
 	for i in obstacle_dict.get(0):
 		var new_grid = gridtile.instantiate()
 		obstaclecontainer.add_child(new_grid)
 		new_grid.global_position = i
 		new_grid.name = str(new_grid.global_position)
+	
+	## SET MENU TEXT
+	if Global.menu == Global.main_menu:
+		menutext_main.visible = true
+		menutext_levels.visible = false
+		menutext_settings.visible = false
+		if Global.completion[1] == true:
+			for i in obstaclecontainer.get_children():
+				if i.global_position == Vector2(416,224):
+					i.queue_free()
+			menutext_main.find_child("LEVELS").visible = true
+		else:
+			menutext_main.find_child("LEVELS").visible = false
+			goal_dict.erase(Color(0.827450, 0.827451, 0.827451, 1))
+	if Global.menu == Global.settings:
+		menutext_main.visible = false
+		menutext_levels.visible = false
+		menutext_settings.visible = true
+	if Global.menu == Global.level_select:
+		menutext_main.visible = false
+		menutext_levels.visible = true
+		menutext_settings.visible = false
+		for i in menutext_levels.get_children():
+			if i.name == "Back": continue
+			else:
+				var check_circle = i.name.to_int() -1
+				if Global.completion[check_circle] == true:
+					pass
+				else:
+					var new_grid = gridtile.instantiate()
+					obstaclecontainer.add_child(new_grid)
+					new_grid.global_position = Vector2(i.global_position.x + 32, i.global_position.y + 32)
+					new_grid.name = str("level ", i.name)
 	
 	## PLACE INITIAL "FLOW DOTS" ONTO GRID BASED ON "flow_dict" DICTIONARY
 	for f in flow_dict.keys():
@@ -148,11 +166,15 @@ func check_for_win(pos):
 				Global.current_level = 1
 				get_parent().get_parent().load_level()
 				queue_free()
-			if pos == Vector2(160,288):
+			elif pos == Vector2(416,224):
 				Global.menu = Global.level_select
 				get_parent().get_parent().load_level()
 				queue_free()
-			if pos == Vector2(288,416):
+			elif pos == Vector2(160,288):
+				Global.menu = Global.settings
+				get_parent().get_parent().load_level()
+				queue_free()
+			elif pos == Vector2(288,416):
 				get_tree().quit()
 		
 		elif Global.menu == Global.level_select:
