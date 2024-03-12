@@ -2,11 +2,11 @@ extends Node
 
 const MAPSIZE = 512
 
-var current_level = 0
+var current_level = 22
 var menu = main_menu
 var completion = [
 	true,
-	false,
+	true,
 	false,
 	false,
 	false,
@@ -43,6 +43,8 @@ var completion = [
 	false,
 	false
 ]
+
+var dev_reset_num = 0
 
 enum {
 	main_menu,
@@ -438,7 +440,109 @@ var levels = {
 			ob_DEV: []
 		}
 	},
-	
+	11: {
+		flow_dictionary: {
+			Color.WHITE_SMOKE: [Vector2(160,32)],
+			Color.DARK_GRAY: [Vector2(96,96)],
+			Color.SLATE_GRAY: [Vector2(352,288)],
+			Color.DIM_GRAY: [Vector2(416,96)]
+		},
+		goal_dictionary: {
+			Color.WHITE_SMOKE: Vector2(224,224),
+			Color.DARK_GRAY: Vector2(224,288),
+			Color.SLATE_GRAY: Vector2(224,480),
+			Color.DIM_GRAY: Vector2(96,416)
+		},
+		obstacle_dictionary: {
+			ob_grid: [
+				Vector2(32,32),Vector2(96,32),
+				Vector2(32,96),Vector2(160,96),
+				Vector2(96,224),
+				Vector2(96,288),Vector2(480,288),
+				Vector2(224,352),Vector2(352,352),Vector2(480,352),
+				Vector2(480,416),
+				Vector2(416,480),Vector2(480,480)
+				],
+			ob_DIS: [[Vector2(288,32),Vector2.DOWN]],
+			ob_DIV: [],
+			ob_DEV: []
+		}
+	},
+	12: {
+		flow_dictionary: {
+			Color.WHITE_SMOKE: [Vector2(96,224)],
+			Color.DIM_GRAY: [Vector2(96,352)]
+		},
+		goal_dictionary: {
+			Color.WHITE_SMOKE: Vector2(288,416),
+			Color.DIM_GRAY: Vector2(160,416)
+		},
+		obstacle_dictionary: {
+			ob_grid: [
+				Vector2(32,32),Vector2(96,32),Vector2(160,32),Vector2(224,32),Vector2(288,32),Vector2(352,32),Vector2(416,32),Vector2(480,32),
+				Vector2(32,96),Vector2(96,96),Vector2(480,96),
+				Vector2(32,160),Vector2(96,160),Vector2(480,160),
+				Vector2(32,224),Vector2(480,224),
+				Vector2(32,288),Vector2(96,288),Vector2(480,288),
+				Vector2(32,352),Vector2(480,352),
+				Vector2(32,416),Vector2(96,416),Vector2(224,416),Vector2(352,416),Vector2(416,416),Vector2(480,416),
+				Vector2(32,480),Vector2(96,480),Vector2(160,480),Vector2(224,480),Vector2(288,480),Vector2(352,480),Vector2(416,480),Vector2(480,480),
+				],
+			ob_DIS: [[Vector2(160,96),Vector2.RIGHT],[Vector2(416,352),Vector2.UP]],
+			ob_DIV: [],
+			ob_DEV: []
+		}
+	},
+	13: {
+		flow_dictionary: {
+			Color.WHITE_SMOKE: [Vector2(160,32)],
+			Color.DARK_GRAY: [Vector2(224,32)],
+			Color.SLATE_GRAY: [Vector2(288,32)],
+			Color.DIM_GRAY: [Vector2(352,32)]
+		},
+		goal_dictionary: {
+			Color.WHITE_SMOKE: Vector2(352,352),
+			Color.DARK_GRAY: Vector2(416,352),
+			Color.SLATE_GRAY: Vector2(160,352),
+			Color.DIM_GRAY: Vector2(480,224)
+		},
+		obstacle_dictionary: {
+			ob_grid: [
+				Vector2(32,32),Vector2(96,32),Vector2(416,32),Vector2(480,32),
+				Vector2(32,96),Vector2(96,96),Vector2(416,96),Vector2(480,96),
+				Vector2(32,160),Vector2(96,160),Vector2(416,160),Vector2(480,160),
+				],
+			ob_DIS: [[Vector2(32,416),Vector2.UP],[Vector2(96,480),Vector2.RIGHT]],
+			ob_DIV: [],
+			ob_DEV: []
+		}
+	},
+	14: {
+		flow_dictionary: {
+			Color.WHITE_SMOKE: [Vector2(224,96)],
+			Color.DARK_GRAY: [Vector2(96,224)],
+			Color.SLATE_GRAY: [Vector2(352,224)],
+			Color.DIM_GRAY: [Vector2(160,288)]
+		},
+		goal_dictionary: {
+			Color.WHITE_SMOKE: Vector2(288,416),
+			Color.DARK_GRAY: Vector2(160,96),
+			Color.SLATE_GRAY: Vector2(32,352),
+			Color.DIM_GRAY: Vector2(416,96)
+		},
+		obstacle_dictionary: {
+			ob_grid: [
+				Vector2(32,32),Vector2(96,32),
+				Vector2(32,96),Vector2(96,96),
+				Vector2(224,352),
+				Vector2(416,416),Vector2(480,416),
+				Vector2(416,480),Vector2(480,480),
+				],
+			ob_DIS: [[Vector2(160,352),Vector2.DOWN],[Vector2(288,352),Vector2.RIGHT]],
+			ob_DIV: [],
+			ob_DEV: []
+		}
+	},
 	15: {
 		flow_dictionary: {
 			Color.WHITE_SMOKE: [Vector2(96,416)],
@@ -492,7 +596,30 @@ var levels = {
 			ob_DEV: []
 		}
 	},
-	
+	17: {
+		flow_dictionary: {
+			Color.WHITE_SMOKE: [Vector2(96,160)],
+			Color.DARK_GRAY: [Vector2(96,224)],
+			Color.SLATE_GRAY: [Vector2(96,288)],
+			Color.DIM_GRAY: [Vector2(96,352)]
+		},
+		goal_dictionary: {
+			Color.WHITE_SMOKE: Vector2(416,160),
+			Color.DARK_GRAY: Vector2(416,352),
+			Color.SLATE_GRAY: Vector2(416,224),
+			Color.DIM_GRAY: Vector2(416,288)
+		},
+		obstacle_dictionary: {
+			ob_grid: [
+				Vector2(32,32),Vector2(96,32),Vector2(160,32),Vector2(224,32),Vector2(288,32),Vector2(352,32),Vector2(416,32),Vector2(480,32),
+				Vector2(224,288),Vector2(288,288),
+				Vector2(32,480),Vector2(96,480),Vector2(160,480),Vector2(224,480),Vector2(288,480),Vector2(352,480),Vector2(416,480),Vector2(480,480),
+				],
+			ob_DIS: [],
+			ob_DIV: [[Vector2(160,416),Vector2.UP]],
+			ob_DEV: []
+		}
+	},
 	18: {
 		flow_dictionary: {
 			Color.SLATE_GRAY: [Vector2(96,288)]
@@ -517,6 +644,113 @@ var levels = {
 		}
 	},
 	19: {
+		flow_dictionary: {
+			Color.WHITE_SMOKE: [Vector2(352,32)],
+			Color.DARK_GRAY: [Vector2(32,160)],
+			Color.SLATE_GRAY: [Vector2(160,480)],
+			Color.DIM_GRAY: [Vector2(480,352)]
+		},
+		goal_dictionary: {
+			Color.WHITE_SMOKE: Vector2(224,288),
+			Color.DARK_GRAY: Vector2(288,288),
+			Color.SLATE_GRAY: Vector2(288,224),
+			Color.DIM_GRAY: Vector2(224,224)
+		},
+		obstacle_dictionary: {
+			ob_grid: [
+				Vector2(32,32),Vector2(96,32),Vector2(416,32),Vector2(480,32),
+				Vector2(32,96),Vector2(96,96),Vector2(416,96),Vector2(480,96),
+				Vector2(32,416),Vector2(96,416),Vector2(416,416),Vector2(480,416),
+				Vector2(32,480),Vector2(96,480),Vector2(416,480),Vector2(480,480),
+				],
+			ob_DIS: [],
+			ob_DIV: [[Vector2(160,160),Vector2.DOWN],[Vector2(352,160),Vector2.LEFT],[Vector2(352,352),Vector2.UP],[Vector2(160,352),Vector2.RIGHT]],
+			ob_DEV: []
+		}
+	},
+	20: {
+		flow_dictionary: {
+			Color.WHITE_SMOKE: [Vector2(96,480)],
+			Color.DARK_GRAY: [Vector2(416,480)],
+			Color.SLATE_GRAY: [Vector2(160,96)],
+			Color.DIM_GRAY: [Vector2(160,288)]
+		},
+		goal_dictionary: {
+			Color.WHITE_SMOKE: Vector2(288,352),
+			Color.DARK_GRAY: Vector2(480,480),
+			Color.SLATE_GRAY: Vector2(160,224),
+			Color.DIM_GRAY: Vector2(160,160)
+		},
+		obstacle_dictionary: {
+			ob_grid: [
+				Vector2(32,32),Vector2(352,32),Vector2(416,32),
+				Vector2(32,96),Vector2(352,96),Vector2(416,96),
+				Vector2(32,160),Vector2(352,160),Vector2(416,160),
+				Vector2(32,224),Vector2(352,224),Vector2(416,224),
+				Vector2(32,288),Vector2(352,288),Vector2(416,288),
+				Vector2(32,352),Vector2(352,352),Vector2(416,352),
+				Vector2(32,416),Vector2(160,416),Vector2(224,416),Vector2(288,416),Vector2(352,416),Vector2(416,416),
+				Vector2(32,480),Vector2(352,480),
+				],
+			ob_DIS: [[Vector2(96,32),Vector2.UP],[Vector2(288,224),Vector2.LEFT]],
+			ob_DIV: [[Vector2(288,480),Vector2.LEFT],[Vector2(480,416),Vector2.UP]],
+			ob_DEV: []
+		}
+	},
+	21: {
+		flow_dictionary: {
+			Color.WHITE_SMOKE: [Vector2(160,416)],
+			Color.DARK_GRAY: [Vector2(352,96)],
+			Color.SLATE_GRAY: [Vector2(160,96)],
+			Color.DIM_GRAY: [Vector2(288,288)]
+		},
+		goal_dictionary: {
+			Color.WHITE_SMOKE: Vector2(288,224),
+			Color.DARK_GRAY: Vector2(224,416),
+			Color.SLATE_GRAY: Vector2(352,416),
+			Color.DIM_GRAY: Vector2(288,32)
+		},
+		obstacle_dictionary: {
+			ob_grid: [
+				Vector2(32,32),Vector2(480,32),
+				Vector2(32,96),Vector2(480,96),
+				Vector2(32,160),Vector2(480,160),
+				Vector2(32,224),Vector2(480,224),
+				Vector2(32,288),Vector2(480,288),
+				Vector2(32,352),Vector2(480,352),
+				Vector2(32,416),Vector2(480,416),
+				Vector2(32,480),Vector2(480,480)
+				],
+			ob_DIS: [[Vector2(224,352),Vector2.RIGHT]],
+			ob_DIV: [[Vector2(224,288),Vector2.RIGHT]],
+			ob_DEV: []
+		}
+	},
+	22: {
+		flow_dictionary: {
+			Color.SLATE_GRAY: [Vector2(96,96)],
+		},
+		goal_dictionary: {
+			Color.SLATE_GRAY: Vector2(416,416),
+		},
+		obstacle_dictionary: {
+			ob_grid: [
+				Vector2(32,32),Vector2(96,32),Vector2(160,32),Vector2(224,32),Vector2(288,32),Vector2(352,32),Vector2(416,32),Vector2(480,32),
+				Vector2(32,96),Vector2(160,96),Vector2(224,96),Vector2(288,96),Vector2(352,96),Vector2(416,96),Vector2(480,96),
+				Vector2(32,160),Vector2(480,160),
+				Vector2(32,224),Vector2(480,224),
+				Vector2(32,288),Vector2(480,288),
+				Vector2(32,352),Vector2(480,352),
+				Vector2(32,416),Vector2(96,416),Vector2(160,416),Vector2(224,416),Vector2(288,416),Vector2(352,416),Vector2(480,416),
+				Vector2(32,480),Vector2(96,480),Vector2(160,480),Vector2(224,480),Vector2(288,480),Vector2(352,480),Vector2(416,480),Vector2(480,480),
+				],
+			ob_DIS: [],
+			ob_DIV: [[Vector2(416,160),Vector2.LEFT],[Vector2(416,224),Vector2.LEFT],[Vector2(416,288),Vector2.LEFT],[Vector2(416,352),Vector2.LEFT]],
+			ob_DEV: []
+		}
+	},
+	
+	33: {
 		flow_dictionary: {
 			Color.WHITE_SMOKE: [Vector2(160,160)],
 			Color.DARK_GRAY: [Vector2(416,416)],
@@ -545,7 +779,7 @@ var levels = {
 			ob_DEV: []
 		}
 	},
-	20: {
+	34: {
 		flow_dictionary: {
 			Color.WHITE_SMOKE: [Vector2(160,288)],
 			Color.LIGHT_GRAY: [Vector2(352,480)],
@@ -568,6 +802,30 @@ var levels = {
 				],
 			ob_DIS: [[Vector2(32,160),Vector2.DOWN],[Vector2(288,352),Vector2.RIGHT]],
 			ob_DIV: [[Vector2(480,416),Vector2.UP]],
+			ob_DEV: []
+		}
+	},
+	
+	36: {
+		flow_dictionary: {
+			Color.WHITE_SMOKE: [Vector2(96,288)],
+		},
+		goal_dictionary: {
+			Color.WHITE_SMOKE: Vector2(416,288),
+		},
+		obstacle_dictionary: {
+			ob_grid: [
+				Vector2(32,32),Vector2(96,32),Vector2(160,32),Vector2(224,32),Vector2(288,32),Vector2(352,32),Vector2(416,32),Vector2(480,32),
+				Vector2(32,96),Vector2(96,96),Vector2(224,96),Vector2(288,96),Vector2(416,96),Vector2(480,96),
+				Vector2(32,160),Vector2(96,160),Vector2(224,160),Vector2(288,160),Vector2(416,160),Vector2(480,160),
+				Vector2(32,224),Vector2(96,224),Vector2(160,224),Vector2(224,224),Vector2(288,224),Vector2(352,224),Vector2(416,224),Vector2(480,224),
+				Vector2(32,288),Vector2(160,288),Vector2(224,288),Vector2(288,288),Vector2(352,288),Vector2(480,288),
+				Vector2(32,352),Vector2(480,352),
+				Vector2(32,416),Vector2(96,416),Vector2(160,416),Vector2(224,416),Vector2(288,416),Vector2(352,416),Vector2(416,416),Vector2(480,416),
+				Vector2(32,480),Vector2(96,480),Vector2(160,480),Vector2(224,480),Vector2(288,480),Vector2(352,480),Vector2(416,480),Vector2(480,480),
+				],
+			ob_DIS: [[Vector2(160,96),Vector2.DOWN]],
+			ob_DIV: [[Vector2(352,96),Vector2.DOWN]],
 			ob_DEV: []
 		}
 	},

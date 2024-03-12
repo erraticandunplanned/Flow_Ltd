@@ -4,12 +4,6 @@ extends Node2D
 @onready var basic_scene = preload("res://scenes/base_level.tscn")
 @onready var menu_scene = preload("res://scenes/menu_level.tscn")
 
-#@onready var transition_node = $transition
-#@onready var bottom_shutter = $transition/bottom_shutter
-#@onready var left_shutter = $transition/left_shutter
-#@onready var right_shutter = $transition/right_shutter
-#@onready var top_shutter = $transition/top_shutter
-
 var current_scene
 var loading_time = 0
 var loading = false
@@ -25,13 +19,6 @@ func _ready():
 	#	shutter.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, meshdata)
 	#reset_shutters()
 	load_level()
-
-#func reset_shutters():
-#	transition_node.global_position = Vector2(0,0)
-#	bottom_shutter.global_position = Vector2(0,Global.MAPSIZE*2-32)
-#	left_shutter.global_position = Vector2(-Global.MAPSIZE*2+32,0)
-#	right_shutter.global_position = Vector2(Global.MAPSIZE*2-32,0)
-#	top_shutter.global_position = Vector2(0,-Global.MAPSIZE*2+32)
 
 func load_level():
 	## CHECK FOR MENU
@@ -54,7 +41,6 @@ func advance_level(location):
 	Global.current_level += 1
 	for i in range(0,36):
 		if not Global.levels.has(Global.current_level):
-			print("skipping level ", Global.current_level)
 			Global.current_level += 1
 		else: break
 	
@@ -64,4 +50,3 @@ func advance_level(location):
 		Global.current_level = 0
 		Global.menu = Global.main_menu
 		load_level()
-		print("Houston, we've run out of levels.")

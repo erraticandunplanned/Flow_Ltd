@@ -6,13 +6,3 @@
 script = ExtResource("1_xyvi8")
 
 [node name="level_loader" type="Node2D" parent="."]
-
-[node name="transition" type="Node2D" parent="."]
-
-[node name="bottom_shutter" type="MeshInstance2D" parent="transition"]
-
-[node name="left_shutter" type="MeshInstance2D" parent="transition"]
-
-[node name="right_shutter" type="MeshInstance2D" parent="transition"]
-
-[node name="top_shutter" type="MeshInstance2D" parent="transition"]

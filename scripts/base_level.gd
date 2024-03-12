@@ -9,6 +9,8 @@ extends Node2D
 @onready var cursor_snap = $cursor_snap
 @onready var cursor_clock = $cursor_clock
 
+@onready var thankyou = $"CanvasLayer/thank you for playing"
+
 @onready var gridtile = preload("res://scenes/gridtile.tscn")
 @onready var DIS = preload("res://scenes/DIS_obstacle.tscn")
 @onready var DIV = preload("res://scenes/DIV_obstacle.tscn")
@@ -72,6 +74,12 @@ func _ready():
 	
 	## DRAW GOALS IN MAP
 	canvas.update_goals(goal_dict)
+	
+	## IF FINAL LEVEL, ADD THANK YOU NOTE
+	if Global.current_level == 36:
+		thankyou.visible = true
+	else:
+		thankyou.visible = false
 
 func _process(_delta):
 	if success: return

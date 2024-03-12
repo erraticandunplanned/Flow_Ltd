@@ -234,6 +234,7 @@ func check_for_win(pos):
 func _on_reset_button_pressed():
 	if time == 0:
 		Global.menu = Global.main_menu
+	
 	get_parent().get_parent().load_level()
 	queue_free()
 
