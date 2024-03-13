@@ -20,9 +20,9 @@ var current_flow_node : Node
 var current_flow_color : Color
 var success = false
 
-var flow_dict = Global.menu_levels.get(Global.menu).get(Global.flow_dictionary).duplicate(true)
-var goal_dict = Global.menu_levels.get(Global.menu).get(Global.goal_dictionary).duplicate(true)
-var obstacle_dict = Global.menu_levels.get(Global.menu).get(Global.obstacle_dictionary).duplicate(true)
+var flow_dict = Levels.menu_levels.get(Global.menu).get(Global.flow_dictionary).duplicate(true)
+var goal_dict = Levels.menu_levels.get(Global.menu).get(Global.goal_dictionary).duplicate(true)
+var obstacle_dict = Levels.menu_levels.get(Global.menu).get(Global.obstacle_dictionary).duplicate(true)
 
 func _ready():
 	## UPDATE CLOCK
@@ -221,7 +221,7 @@ func check_for_win(pos):
 					Vector2(288,416): target_level = 34
 					Vector2(352,416): target_level = 35
 					Vector2(416,416): target_level = 36
-				if Global.levels.has(target_level):
+				if Levels.levels.has(target_level):
 					Global.current_level = target_level
 					get_parent().get_parent().load_level()
 					queue_free()
@@ -229,7 +229,20 @@ func check_for_win(pos):
 					print("Level doesn't exist yet :(")
 		
 		elif Global.menu == Global.settings:
-			pass
+			if pos == Vector2(32,160):
+				Global.menu = Global.main_menu
+				get_parent().get_parent().load_level()
+				queue_free()
+			elif current_flow_color != Color.LIGHT_GRAY:
+				var color_dict = Levels.menu_levels.get(Global.settings).get(Global.goal_dictionary)
+				for c in color_dict.keys():
+					if pos == color_dict.get(c):
+						if current_flow_color == Global.node_color_1: 
+							print(Global.node_color_1)
+							Global.node_color_1 = c
+							print(Global.node_color_1)
+							get_parent().get_parent().load_level()
+							queue_free()
 
 func _on_reset_button_pressed():
 	if time == 0:

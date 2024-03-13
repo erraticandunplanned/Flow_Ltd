@@ -40,11 +40,11 @@ func advance_level(location):
 	current_scene.queue_free()
 	Global.current_level += 1
 	for i in range(0,36):
-		if not Global.levels.has(Global.current_level):
+		if not Levels.levels.has(Global.current_level):
 			Global.current_level += 1
 		else: break
 	
-	if Global.levels.has(Global.current_level):
+	if Levels.levels.has(Global.current_level):
 		load_level()
 	else:
 		Global.current_level = 0

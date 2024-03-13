@@ -25,9 +25,9 @@ var success = false
 
 signal clock_update(time)
 
-var flow_dict = Global.levels.get(Global.current_level).get(Global.flow_dictionary).duplicate(true)
-var goal_dict = Global.levels.get(Global.current_level).get(Global.goal_dictionary).duplicate(true)
-var obstacle_dict = Global.levels.get(Global.current_level).get(Global.obstacle_dictionary).duplicate(true)
+var flow_dict = Levels.levels.get(Global.current_level).get(Global.flow_dictionary).duplicate(true)
+var goal_dict = Levels.levels.get(Global.current_level).get(Global.goal_dictionary).duplicate(true)
+var obstacle_dict = Levels.levels.get(Global.current_level).get(Global.obstacle_dictionary).duplicate(true)
 
 func _ready():
 	## UPDATE CLOCK
