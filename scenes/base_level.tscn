@@ -7,7 +7,7 @@
 font_size = 11
 
 [sub_resource type="LabelSettings" id="LabelSettings_qrk68"]
-font_size = 100
+font_size = 32
 
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_wvhy0")
@@ -66,7 +66,6 @@ text = "MENU"
 label_settings = SubResource("LabelSettings_vqnrh")
 
 [node name="thank you for playing" type="Control" parent="CanvasLayer"]
-visible = false
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
