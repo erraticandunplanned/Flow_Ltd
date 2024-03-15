@@ -54,18 +54,6 @@ var menu_levels = {
 			Color(0.827429, 0.827429, 0.827429, 1): Vector2(288,288),
 			Color(0.827428, 0.827428, 0.827428, 1): Vector2(352,288),
 			Color(0.827427, 0.827427, 0.827427, 1): Vector2(416,288),
-			Color(0.827426, 0.827426, 0.827426, 1): Vector2(96,352),
-			Color(0.827425, 0.827425, 0.827425, 1): Vector2(160,352),
-			Color(0.827424, 0.827424, 0.827424, 1): Vector2(224,352),
-			Color(0.827423, 0.827423, 0.827423, 1): Vector2(288,352),
-			Color(0.827422, 0.827422, 0.827422, 1): Vector2(352,352),
-			Color(0.827421, 0.827421, 0.827421, 1): Vector2(416,352),
-			Color(0.827420, 0.827420, 0.827420, 1): Vector2(96,416),
-			Color(0.827419, 0.827419, 0.827419, 1): Vector2(160,416),
-			Color(0.827418, 0.827418, 0.827418, 1): Vector2(224,416),
-			Color(0.827417, 0.827417, 0.827417, 1): Vector2(288,416),
-			Color(0.827416, 0.827416, 0.827416, 1): Vector2(352,416),
-			Color(0.827415, 0.827415, 0.827415, 1): Vector2(416,416)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -74,62 +62,28 @@ var menu_levels = {
 				Vector2(480,160),
 				Vector2(32,224),Vector2(480,224),
 				Vector2(32,288),Vector2(480,288),
-				Vector2(32,352),Vector2(480,352),
-				Vector2(32,416),Vector2(480,416),
+				Vector2(32,352),Vector2(96,352),Vector2(160,352),Vector2(224,352),Vector2(288,352),Vector2(352,352),Vector2(416,352),Vector2(480,352),
+				Vector2(32,416),Vector2(96,416),Vector2(160,416),Vector2(224,416),Vector2(288,416),Vector2(352,416),Vector2(416,416),Vector2(480,416),
 				Vector2(32,480),Vector2(96,480),Vector2(160,480),Vector2(224,480),Vector2(288,480),Vector2(352,480),Vector2(416,480),Vector2(480,480),
 				],
 		}
 	},
-	Global.settings: {
+	Global.about: {
 		Global.flow_dictionary: {
 			Color.LIGHT_GRAY: [Vector2(32,96)],
-			Global.node_color_1: [Vector2(160,96)],
-			Global.node_color_2: [Vector2(224,96)],
-			Global.node_color_3: [Vector2(288,96)],
-			Global.node_color_4: [Vector2(352,96)],
 		},
 		Global.goal_dictionary: {
-			Color.LIGHT_GRAY: Vector2(32,160), ## Back Button
-			Color.WHITE_SMOKE: Vector2(160,96),
-			Color.DARK_GRAY: Vector2(224,96),
-			Color.SLATE_GRAY: Vector2(288,96),
-			Color.DIM_GRAY: Vector2(352,96),
-			Color.BLACK: Vector2(416,96),
-			Color.RED: Vector2(160,160),
-			Color.ORANGE: Vector2(224,160),
-			Color.YELLOW: Vector2(288,160),
-			Color.GREEN: Vector2(352,160),
-			Color.BLUE: Vector2(416,160),
-			Color.INDIGO: Vector2(160,224),
-			Color.VIOLET: Vector2(224,224),
-			Color.MAGENTA: Vector2(288,224),
-			Color.BROWN: Vector2(352,224),
-			Color.BEIGE: Vector2(416,224),
-			Color.DARK_RED: Vector2(160,288),
-			Color.DARK_ORANGE: Vector2(224,288),
-			Color.DARK_KHAKI: Vector2(288,288),
-			Color.DARK_GREEN: Vector2(352,288),
-			Color.DARK_BLUE: Vector2(416,288),
-			Color.DARK_ORCHID: Vector2(160,352),
-			Color.PALE_VIOLET_RED: Vector2(224,352),
-			Color.PALE_GOLDENROD: Vector2(288,352),
-			Color.PALE_GREEN: Vector2(352,352),
-			Color.PALE_TURQUOISE: Vector2(416,352),
-			Color(0.827419, 0.827419, 0.827419, 1): Vector2(160,416),
-			Color(0.827418, 0.827418, 0.827418, 1): Vector2(224,416),
-			Color(0.827417, 0.827417, 0.827417, 1): Vector2(288,416),
-			Color(0.827416, 0.827416, 0.827416, 1): Vector2(352,416),
-			Color(0.827415, 0.827415, 0.827415, 1): Vector2(416,416)
+			Color.LIGHT_GRAY: Vector2(96,224), ## Back Button
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
 				Vector2(32,32),Vector2(96,32),Vector2(160,32),Vector2(224,32),Vector2(288,32),Vector2(352,32),Vector2(416,32),Vector2(480,32),
-				Vector2(96,96),Vector2(480,96),
-				Vector2(96,160),Vector2(480,160),
-				Vector2(32,224),Vector2(96,224),Vector2(480,224),
-				Vector2(32,288),Vector2(96,288),Vector2(480,288),
-				Vector2(32,352),Vector2(96,352),Vector2(480,352),
-				Vector2(32,416),Vector2(96,416),Vector2(480,416),
+				Vector2(480,96),
+				Vector2(32,160),Vector2(96,160),Vector2(160,160),Vector2(224,160),Vector2(288,160),Vector2(352,160),Vector2(480,160),
+				Vector2(32,224),Vector2(160,224),Vector2(224,224),Vector2(288,224),Vector2(352,224),Vector2(480,224),
+				Vector2(32,288),Vector2(160,288),Vector2(224,288),Vector2(288,288),Vector2(352,288),Vector2(480,288),
+				Vector2(32,352),Vector2(160,352),Vector2(224,352),Vector2(288,352),Vector2(352,352),Vector2(480,352),
+				Vector2(32,416),Vector2(480,416),
 				Vector2(32,480),Vector2(96,480),Vector2(160,480),Vector2(224,480),Vector2(288,480),Vector2(352,480),Vector2(416,480),Vector2(480,480),
 				],
 		}
@@ -721,9 +675,7 @@ var levels = {
 			Global.ob_DEV: []
 		}
 	},
-	
-	
-	33: {
+	23: {
 		Global.flow_dictionary: {
 			Global.node_color_1: [Vector2(160,160)],
 			Global.node_color_2: [Vector2(416,416)],
@@ -752,7 +704,7 @@ var levels = {
 			Global.ob_DEV: []
 		}
 	},
-	34: {
+	24: {
 		Global.flow_dictionary: {
 			Global.node_color_1: [Vector2(160,288)],
 			Global.node_color_3: [Vector2(352,480)],
@@ -778,8 +730,7 @@ var levels = {
 			Global.ob_DEV: []
 		}
 	},
-	
-	36: {
+	25: {
 		Global.flow_dictionary: {
 			Global.node_color_1: [Vector2(96,288)],
 		},

@@ -11,7 +11,11 @@ extends Node2D
 
 @onready var menutext_main = $Labels/main_menu
 @onready var menutext_levels = $Labels/level_select
-@onready var menutext_settings = $Labels/settings
+@onready var menutext_about = $Labels/about
+
+@onready var count_level = $Labels/main_menu/STATBLOCK/count_levels/CenterContainer/Label
+@onready var count_moves = $Labels/main_menu/STATBLOCK/count_moves/CenterContainer/Label
+@onready var count_reset = $Labels/main_menu/STATBLOCK/count_resets/CenterContainer/Label
 
 @onready var gridtile = preload("res://scenes/gridtile.tscn")
 
@@ -40,23 +44,31 @@ func _ready():
 	if Global.menu == Global.main_menu:
 		menutext_main.visible = true
 		menutext_levels.visible = false
-		menutext_settings.visible = false
+		menutext_about.visible = false
 		if Global.completion[1] == true:
 			for i in obstaclecontainer.get_children():
 				if i.global_position == Vector2(416,224):
 					i.queue_free()
 			menutext_main.find_child("LEVELS").visible = true
+			menutext_main.find_child("STATBLOCK").visible = true
+			var level_count = -1
+			for i in Global.completion:
+				if i == true: level_count += 1
+			count_level.text = str(level_count)
+			count_moves.text = str(Global.total_moves)
+			count_reset.text = str(Global.total_resets)
 		else:
 			menutext_main.find_child("LEVELS").visible = false
+			menutext_main.find_child("STATBLOCK").visible = false
 			goal_dict.erase(Color(0.827450, 0.827451, 0.827451, 1))
-	if Global.menu == Global.settings:
+	if Global.menu == Global.about:
 		menutext_main.visible = false
 		menutext_levels.visible = false
-		menutext_settings.visible = true
+		menutext_about.visible = true
 	if Global.menu == Global.level_select:
 		menutext_main.visible = false
 		menutext_levels.visible = true
-		menutext_settings.visible = false
+		menutext_about.visible = false
 		for i in menutext_levels.get_children():
 			if i.name == "Back": continue
 			else:
@@ -171,7 +183,7 @@ func check_for_win(pos):
 				get_parent().get_parent().load_level()
 				queue_free()
 			elif pos == Vector2(160,288):
-				Global.menu = Global.settings
+				Global.menu = Global.about
 				get_parent().get_parent().load_level()
 				queue_free()
 			elif pos == Vector2(288,416):
@@ -228,21 +240,11 @@ func check_for_win(pos):
 				else:
 					print("Level doesn't exist yet :(")
 		
-		elif Global.menu == Global.settings:
-			if pos == Vector2(32,160):
+		elif Global.menu == Global.about:
+			if pos == Vector2(96,224):
 				Global.menu = Global.main_menu
 				get_parent().get_parent().load_level()
 				queue_free()
-			elif current_flow_color != Color.LIGHT_GRAY:
-				var color_dict = Levels.menu_levels.get(Global.settings).get(Global.goal_dictionary)
-				for c in color_dict.keys():
-					if pos == color_dict.get(c):
-						if current_flow_color == Global.node_color_1: 
-							print(Global.node_color_1)
-							Global.node_color_1 = c
-							print(Global.node_color_1)
-							get_parent().get_parent().load_level()
-							queue_free()
 
 func _on_reset_button_pressed():
 	if time == 0:

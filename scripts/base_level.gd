@@ -76,7 +76,7 @@ func _ready():
 	canvas.update_goals(goal_dict)
 	
 	## IF FINAL LEVEL, ADD THANK YOU NOTE
-	if Global.current_level == 36:
+	if Global.current_level == 25:
 		thankyou.visible = true
 	else:
 		thankyou.visible = false
@@ -153,6 +153,7 @@ func _process(_delta):
 			time += 1
 			var text = str(Global.current_level) + " | " + str(time)
 			clock_text.text = text
+			Global.total_moves += 1
 			emit_signal("clock_update", time)
 	
 	## CHECK FOR WIN CONDITION
@@ -180,6 +181,7 @@ func _on_reset_button_pressed():
 		get_parent().get_parent().load_level()
 		queue_free()
 	else:
+		Global.total_resets += 1
 		get_parent().get_parent().reset_level()
 
 ## DRAW GRID LINES

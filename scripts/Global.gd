@@ -6,17 +6,6 @@ var current_level = 0
 var menu = main_menu
 var completion = [
 	true,
-	true,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
-	false,
 	false,
 	false,
 	false,
@@ -43,16 +32,18 @@ var completion = [
 	false,
 	false
 ]
+var total_moves = 0
+var total_resets = 0
 
-var node_color_1 = Color.WHITE_SMOKE
-var node_color_2 = Color.DARK_GRAY
-var node_color_3 = Color.SLATE_GRAY
-var node_color_4 = Color.DIM_GRAY
+var node_color_1 = Color(0.96, 0.96, 0.96, 1) # White Smoke
+var node_color_2 = Color(0.41, 0.41, 0.41, 1) # Dim Gray
+var node_color_3 = Color(0.23, 0.23, 0.23, 1)
+var node_color_4 = Color(0.08, 0.08, 0.08, 1)
 
 enum {
 	main_menu,
 	level_select,
-	settings
+	about
 }
 
 enum {

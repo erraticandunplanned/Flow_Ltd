@@ -9,15 +9,6 @@ var loading_time = 0
 var loading = false
 
 func _ready():
-	#for shutter in [bottom_shutter,left_shutter,right_shutter,top_shutter]:
-	#	var meshdata = []
-	#	meshdata.resize(ArrayMesh.ARRAY_MAX)
-	#	meshdata[ArrayMesh.ARRAY_VERTEX] = PackedVector2Array([Vector2(0,0),Vector2(Global.MAPSIZE,0),Vector2(Global.MAPSIZE,Global.MAPSIZE),Vector2(0,Global.MAPSIZE)])
-	#	meshdata[ArrayMesh.ARRAY_INDEX] = PackedInt32Array([0,1,2,2,3,0])
-	#	meshdata[ArrayMesh.ARRAY_COLOR] = PackedColorArray([Color.DARK_SLATE_BLUE,Color.DARK_SLATE_BLUE,Color.DARK_SLATE_BLUE,Color.DARK_SLATE_BLUE])
-	#	shutter.mesh = ArrayMesh.new()
-	#	shutter.mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, meshdata)
-	#reset_shutters()
 	load_level()
 
 func load_level():
