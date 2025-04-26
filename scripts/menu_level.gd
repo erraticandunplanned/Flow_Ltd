@@ -20,6 +20,7 @@ extends Node2D
 @onready var gridtile = preload("res://scenes/gridtile.tscn")
 
 var time = 0
+var cheat_unlock = 0
 var current_flow_node : Node
 var current_flow_color : Color
 var success = false
@@ -55,7 +56,10 @@ func _ready():
 			for i in Global.completion:
 				if i == true: level_count += 1
 			count_level.text = str(level_count)
-			count_moves.text = str(Global.total_moves)
+			var total_moves = 0
+			for i in Global.move_counter.size():
+				total_moves += Global.move_counter[i]
+			count_moves.text = str(total_moves)
 			count_reset.text = str(Global.total_resets)
 		else:
 			menutext_main.find_child("LEVELS").visible = false
@@ -164,6 +168,7 @@ func _process(_delta):
 			canvas.update_flow(flow_dict)
 			
 			## ADVANCE CLOCK
+			cheat_unlock = 0
 			time += 1
 			var text = str(Global.current_level) + " | " + str(time)
 			clock_text.text = text
@@ -247,11 +252,17 @@ func check_for_win(pos):
 				queue_free()
 
 func _on_reset_button_pressed():
-	if time == 0:
+	cheat_unlock += 1
+	print(cheat_unlock)
+	if Global.menu == Global.main_menu:
+		if cheat_unlock >= 25:
+			Global.unlock(25)
+			get_parent().get_parent().load_level()
+			queue_free()
+	elif time == 0:
 		Global.menu = Global.main_menu
-	
-	get_parent().get_parent().load_level()
-	queue_free()
+		get_parent().get_parent().load_level()
+		queue_free()
 
 ## DRAW GRID LINES
 func _draw():

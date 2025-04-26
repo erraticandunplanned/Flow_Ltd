@@ -9,6 +9,8 @@ var loading_time = 0
 var loading = false
 
 func _ready():
+	Global.unlock(Global.dev_unlock)
+	
 	load_level()
 
 func load_level():

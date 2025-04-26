@@ -181,18 +181,19 @@ var levels = {
 		Global.flow_dictionary: {
 			Global.node_color_1: [Vector2(288,224)],
 			Global.node_color_2: [Vector2(224,224)],
-			Global.node_color_3: [Vector2(352,288)],
-			Global.node_color_4: [Vector2(32,160)]
+			Global.node_color_3: [Vector2(32,160)],
 		},
 		Global.goal_dictionary: {
 			Global.node_color_1: Vector2(96,352),
 			Global.node_color_2: Vector2(416,160),
-			Global.node_color_3: Vector2(96,160),
-			Global.node_color_4: Vector2(224,416)
+			Global.node_color_3: Vector2(224,416),
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
 				Vector2(32,32),Vector2(96,32),Vector2(160,32),Vector2(224,32),Vector2(288,32),Vector2(352,32),Vector2(416,32),Vector2(480,32),
+				Vector2(96,160),Vector2(160,160),Vector2(224,160),Vector2(288,160),Vector2(352,160),
+				Vector2(352,224),
+				Vector2(352,288),
 				Vector2(32,480),Vector2(96,480),Vector2(160,480),Vector2(224,480),Vector2(288,480),Vector2(352,480),Vector2(416,480),Vector2(480,480),
 				],
 			Global.ob_DIS: [],
@@ -472,9 +473,9 @@ var levels = {
 	15: {
 		Global.flow_dictionary: {
 			Global.node_color_1: [Vector2(96,416)],
-			Global.node_color_2: [Vector2(288,224)],
-			Global.node_color_3: [Vector2(352,288)],
-			Global.node_color_4: [Vector2(224,96)]
+			Global.node_color_2: [Vector2(288,352)],
+			Global.node_color_3: [Vector2(352,352)],
+			Global.node_color_4: [Vector2(416,96)]
 		},
 		Global.goal_dictionary: {
 			Global.node_color_2: Vector2(480,96),

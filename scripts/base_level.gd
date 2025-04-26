@@ -153,7 +153,7 @@ func _process(_delta):
 			time += 1
 			var text = str(Global.current_level) + " | " + str(time)
 			clock_text.text = text
-			Global.total_moves += 1
+			#Global.total_moves += 1
 			emit_signal("clock_update", time)
 	
 	## CHECK FOR WIN CONDITION
@@ -167,6 +167,7 @@ func _process(_delta):
 	
 	queue_redraw()
 	if success == true:
+		if Global.move_counter[Global.current_level] == 0 or Global.move_counter[Global.current_level] > time: Global.move_counter[Global.current_level] = time
 		get_parent().get_parent().advance_level(cursor_clock)
 
 func _on_collision(pos):
