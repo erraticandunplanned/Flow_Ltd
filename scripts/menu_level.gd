@@ -12,7 +12,11 @@ extends Node2D
 @onready var menutext_main = $Labels/main_menu
 @onready var menutext_levels = $Labels/level_select
 @onready var menutext_about = $Labels/about
-@onready var menutext_settings = $Labels/settings
+@onready var menutext_settings_display = $Labels/settings_display
+#@onready var menutext_settings_audio =
+#@onready var menutext_settings_game =
+@onready var menutext_settings_color = $Labels/settings_color
+#@onready var menutext_settings_player =
 
 @onready var count_level = $Labels/main_menu/STATBLOCK/count_levels/CenterContainer/Label
 @onready var count_moves = $Labels/main_menu/STATBLOCK/count_moves/CenterContainer/Label
@@ -23,7 +27,8 @@ extends Node2D
 var time = 0
 var cheat_unlock = 0
 var current_flow_node : Node
-var current_flow_color : Color
+var current_flow_index : int
+#var current_flow_color : Color
 var success = false
 
 var flow_dict = Levels.menu_levels.get(Global.menu).get(Global.flow_dictionary).duplicate(true)
@@ -47,7 +52,26 @@ func _ready():
 		menutext_main.visible = true
 		menutext_levels.visible = false
 		menutext_about.visible = false
-		menutext_settings.visible = false
+		menutext_settings_display.visible = false
+		#menutext_settings_audio.visible = false
+		#menutext_settings_game.visible = false
+		menutext_settings_color.visible = false
+		#menutext_settings_player.visible = false
+		
+		
+		goal_dict.clear()
+		var goal_entry_1 = Global.node_colors[1] + Color(0.000001,0,0,1)
+		var goal_entry_2 = Global.node_colors[1] + Color(0,0.000001,0,1)
+		var goal_entry_3 = Global.node_colors[1] + Color(0,0,0.000001,1)
+		var goal_entry_4 = Global.node_colors[1] + Color(0.000001,0.000001,0,1)
+		var new_goal_colors = {
+			goal_entry_1: Vector2(416,288),
+			goal_entry_2: Vector2(288,416),
+			goal_entry_3: Vector2(416,224),
+			goal_entry_4: Vector2(96,288),
+		}
+		goal_dict.merge(new_goal_colors)
+		
 		if Global.completion[1] == true:
 			for i in obstaclecontainer.get_children():
 				if i.global_position == Vector2(416,224):
@@ -66,17 +90,25 @@ func _ready():
 		else:
 			menutext_main.find_child("LEVELS").visible = false
 			menutext_main.find_child("STATBLOCK").visible = false
-			goal_dict.erase(Color(0.827450, 0.827451, 0.827451, 1))
+			goal_dict.erase(goal_entry_3)
 	if Global.menu == Global.about:
 		menutext_main.visible = false
 		menutext_levels.visible = false
 		menutext_about.visible = true
-		menutext_settings.visible = false
+		menutext_settings_display.visible = false
+		#menutext_settings_audio.visible = false
+		#menutext_settings_game.visible = false
+		menutext_settings_color.visible = false
+		#menutext_settings_player.visible = false
 	if Global.menu == Global.level_select:
 		menutext_main.visible = false
 		menutext_levels.visible = true
 		menutext_about.visible = false
-		menutext_settings.visible = false
+		menutext_settings_display.visible = false
+		#menutext_settings_audio.visible = false
+		#menutext_settings_game.visible = false
+		menutext_settings_color.visible = false
+		#menutext_settings_player.visible = false
 		for i in menutext_levels.get_children():
 			if i.name == "Back": continue
 			else:
@@ -88,28 +120,43 @@ func _ready():
 					obstaclecontainer.add_child(new_grid)
 					new_grid.global_position = Vector2(i.global_position.x + 32, i.global_position.y + 32)
 					new_grid.name = str("level ", i.name)
-	if Global.menu == Global.settings:
+	if Global.menu == Global.settings_display:
 		menutext_main.visible = false
 		menutext_levels.visible = false
 		menutext_about.visible = false
-		menutext_settings.visible = true
+		menutext_settings_display.visible = true
+		#menutext_settings_audio.visible = false
+		#menutext_settings_game.visible = false
+		menutext_settings_color.visible = false
+		#menutext_settings_player.visible = false
+	if Global.menu == Global.settings_color:
+		menutext_main.visible = false
+		menutext_levels.visible = false
+		menutext_about.visible = false
+		menutext_settings_display.visible = false
+		#menutext_settings_audio.visible = false
+		#menutext_settings_game.visible = false
+		menutext_settings_color.visible = true
+		#menutext_settings_player.visible = false
 		
 		var flow_entry_1 = {}
 		var flow_entry_2 = {}
 		var flow_entry_3 = {}
 		var flow_entry_4 = {}
 		
-		for c in Levels.menu_levels.get(Global.settings).get(Global.goal_dictionary).keys():
-			if Global.node_colors.get(1) == c: flow_entry_1 = {c: [Levels.menu_levels.get(Global.settings).get(Global.goal_dictionary).get(c)]}
-			if Global.node_colors.get(2) == c: flow_entry_2 = {c: [Levels.menu_levels.get(Global.settings).get(Global.goal_dictionary).get(c)]}
-			if Global.node_colors.get(3) == c: flow_entry_3 = {c: [Levels.menu_levels.get(Global.settings).get(Global.goal_dictionary).get(c)]}
-			if Global.node_colors.get(4) == c: flow_entry_4 = {c: [Levels.menu_levels.get(Global.settings).get(Global.goal_dictionary).get(c)]}
+		for c in Levels.menu_levels.get(Global.settings_color).get(Global.goal_dictionary).keys():
+			if c is Color:
+				if Global.node_colors.get(1) == c: flow_entry_1 = {1: [Levels.menu_levels.get(Global.settings_color).get(Global.goal_dictionary).get(c)]}
+				elif Global.node_colors.get(2) == c: flow_entry_2 = {2: [Levels.menu_levels.get(Global.settings_color).get(Global.goal_dictionary).get(c)]}
+				elif Global.node_colors.get(3) == c: flow_entry_3 = {3: [Levels.menu_levels.get(Global.settings_color).get(Global.goal_dictionary).get(c)]}
+				elif Global.node_colors.get(4) == c: flow_entry_4 = {4: [Levels.menu_levels.get(Global.settings_color).get(Global.goal_dictionary).get(c)]}
 		
 		flow_dict.clear()
 		flow_dict.merge(flow_entry_1)
 		flow_dict.merge(flow_entry_2)
 		flow_dict.merge(flow_entry_3)
 		flow_dict.merge(flow_entry_4)
+		flow_dict.merge({99:[Vector2(352,480)]})
 	
 	## PLACE INITIAL "FLOW DOTS" ONTO GRID BASED ON "flow_dict" DICTIONARY
 	for f in flow_dict.keys():
@@ -139,13 +186,13 @@ func _process(_delta):
 				for j in flow_dict.keys():
 					var key = flow_dict[j]
 					if key.back() == i.global_position:
-						current_flow_color = j
+						current_flow_index = j
 	
 	## ON MOUSE RELEASE, SET CURRENT FLOW NODE TO NULL
 	if Input.is_action_just_released("left_mouse_click"):
 		if current_flow_node != null: check_for_win(current_flow_node.global_position)
 		current_flow_node = null
-		current_flow_color = Color.WHITE
+		current_flow_index = 0
 		
 	
 	## SET "CURSOR_SNAP" TO THE NEAREST GRID LOCATION OF MOUSE
@@ -153,20 +200,20 @@ func _process(_delta):
 	cursor_snap.global_position = Vector2(clamp(floor(mousepos.x / 64) * 64 + 32, 32, (Global.MAP_TILE_SIZE.y * Global.MAP_MAX_SIZE.y) - 32), clamp(floor(mousepos.y / 64) * 64 + 32, 32, (Global.MAP_TILE_SIZE.y * Global.MAP_MAX_SIZE.y) - 32))
 	
 	## MOST OF THIS FUNCTION ONLY CALLS IF THE MOUSE IS HOLDING A FLOW CIRCLE
-	if current_flow_node != null and flow_dict.has(current_flow_color):
+	if current_flow_node != null and flow_dict.has(current_flow_index):
 		
 		## SET "CURSOR_CLOCK" TO ONLY VALID TILES
 		var is_valid = true
 		
 		## GOING BACKWARDS 1 TILE IS A VALID TILE
-		if flow_dict.get(current_flow_color).has(cursor_snap.global_position): 
+		if flow_dict.get(current_flow_index).has(cursor_snap.global_position): 
 			@warning_ignore("unassigned_variable")
 			var reverse_flow : Array
-			reverse_flow.append_array(flow_dict.get(current_flow_color))
+			reverse_flow.append_array(flow_dict.get(current_flow_index))
 			reverse_flow.reverse()
 			if reverse_flow.size() > 1:
 				if reverse_flow[1] == cursor_snap.global_position:
-					flow_dict.get(current_flow_color).remove_at(flow_dict.get(current_flow_color).size()-1)
+					flow_dict.get(current_flow_index).remove_at(flow_dict.get(current_flow_index).size()-1)
 					is_valid = true
 				else: is_valid = false
 			else:
@@ -190,7 +237,7 @@ func _process(_delta):
 			
 			## UPDATE FLOW POSITION AND DRAW LINES
 			current_flow_node.global_position = cursor_clock.global_position
-			flow_dict.get(current_flow_color).append(current_flow_node.global_position)
+			flow_dict.get(current_flow_index).append(current_flow_node.global_position)
 			canvas.update_flow(flow_dict)
 			
 			## ADVANCE CLOCK
@@ -213,12 +260,12 @@ func check_for_win(pos):
 				Global.menu = Global.level_select
 				get_parent().get_parent().load_level()
 				queue_free()
-			elif pos == Vector2(160,288):
+			elif pos == Vector2(96,288):
 				Global.menu = Global.about
 				get_parent().get_parent().load_level()
 				queue_free()
 			elif pos == Vector2(288,416):
-				Global.menu = Global.settings
+				Global.menu = Global.settings_display
 				get_parent().get_parent().load_level()
 				queue_free()
 		
@@ -274,18 +321,40 @@ func check_for_win(pos):
 					print("Level doesn't exist yet :(")
 		
 		elif Global.menu == Global.about:
-			if pos == Vector2(96,224):
+			if pos == Vector2(96,288):
 				Global.menu = Global.main_menu
 				get_parent().get_parent().load_level()
 				queue_free()
 		
-		elif Global.menu == Global.settings:
-			for c in Levels.menu_levels.get(Global.settings).get(Global.goal_dictionary).keys():
-				if Levels.menu_levels.get(Global.settings).get(Global.goal_dictionary).get(c) == pos:
-					if current_flow_color == Global.node_colors[1]: Global.node_colors[1] = c
-					if current_flow_color == Global.node_colors[2]: Global.node_colors[2] = c
-					if current_flow_color == Global.node_colors[3]: Global.node_colors[3] = c
-					if current_flow_color == Global.node_colors[4]: Global.node_colors[4] = c
+		elif Global.menu == Global.settings_display:
+			if current_flow_index == 1:
+				match pos:
+					Vector2(96,480): Global.menu = Global.main_menu
+					Vector2(160,480): pass
+					Vector2(224,480): pass
+					Vector2(288,480): pass
+					Vector2(352,480): Global.menu = Global.settings_color
+					Vector2(416,480): pass
+				get_parent().get_parent().load_level()
+				queue_free()
+		
+		elif Global.menu == Global.settings_color:
+			if current_flow_index == 99:
+				match pos:
+					Vector2(96,480): Global.menu = Global.main_menu
+					Vector2(160,480): Global.menu = Global.settings_display
+					Vector2(224,480): pass
+					Vector2(288,480): pass
+					Vector2(352,480): pass
+					Vector2(416,480): pass
+			else:
+				for c in Levels.menu_levels.get(Global.settings_color).get(Global.goal_dictionary).keys():
+					if Levels.menu_levels.get(Global.settings_color).get(Global.goal_dictionary).get(c) == pos and c is Color:
+						match current_flow_index:
+							1: Global.node_colors[1] = c
+							2: Global.node_colors[2] = c
+							3: Global.node_colors[3] = c
+							4: Global.node_colors[4] = c
 			get_parent().get_parent().load_level()
 			queue_free()
 

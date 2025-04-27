@@ -67,7 +67,7 @@ var move_counter = [
 var total_resets = 0
 
 var node_colors = {
-	0: Color.TRANSPARENT,
+	#0: Color.TRANSPARENT,
 	1: Color(0.96, 0.96, 0.96, 1),
 	2: Color(0.41, 0.41, 0.41, 1),
 	3: Color(0.23, 0.23, 0.23, 1),
@@ -83,7 +83,11 @@ enum {
 	main_menu,
 	level_select,
 	about,
-	settings
+	settings_display,
+	settings_audio,
+	settings_game,
+	settings_color,
+	settings_player
 }
 
 enum {
