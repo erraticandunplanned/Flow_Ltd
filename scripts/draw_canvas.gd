@@ -25,8 +25,9 @@ func _draw():
 func update_goals(g):
 	goals.clear()
 	for key_color in g.keys():
+		var color = key_color if key_color is Color else Global.node_colors.get(key_color)
 		var location = g.get(key_color)
-		var new_goal = [location, key_color]
+		var new_goal = [location, color]
 		goals.append(new_goal)
 
 func update_flow(d):
@@ -40,17 +41,18 @@ func update_flow(d):
 		
 		## UPDATE THE "flow_nodes" ARRAY TO CONTAIN CURRENT POSITION AND COLOR OF ALL FLOW NODES
 		var value = array.back()
-		var newflow = [value, k]
+		var color = k if k is Color else Global.node_colors.get(k)
+		var newflow = [value, color]
 		flow_nodes.append(newflow)
 		
 		## UPDATE THE "lines" ARRAY TO CONTAIN ALL LINES
 		var last = Vector2.ZERO
 		for i in array:
 			if last != Vector2.ZERO: 
-				var newline = [last,i,k]
+				var newline = [last,i,color]
 				lines.append(newline)
 			last = i
 			
 			## UPDATE THE "circles" ARRAY TO CONTAIN ALL CORNERS
-			var newcircle = [i,k]
+			var newcircle = [i,color]
 			circles.append(newcircle)

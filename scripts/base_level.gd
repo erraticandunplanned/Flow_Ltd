@@ -20,7 +20,8 @@ extends Node2D
 
 var time = 0
 var current_flow_node : Node
-var current_flow_color : Color
+var current_flow_index : int
+#var current_flow_color # : Color
 var success = false
 
 signal clock_update(time)
@@ -97,32 +98,32 @@ func _process(_delta):
 				for j in flow_dict.keys():
 					var key = flow_dict[j]
 					if key.back() == i.global_position:
-						current_flow_color = j
+						current_flow_index = j
 	
 	## ON MOUSE RELEASE, SET CURRENT FLOW NODE TO NULL
 	if Input.is_action_just_released("left_mouse_click"):
 		current_flow_node = null
-		current_flow_color = Color.WHITE
+		current_flow_index = 0
 	
 	## SET "CURSOR_SNAP" TO THE NEAREST GRID LOCATION OF MOUSE
 	var mousepos = get_global_mouse_position()
-	cursor_snap.global_position = Vector2(clamp(floor(mousepos.x / 64) * 64 + 32, 32, Global.MAPSIZE - 32), clamp(floor(mousepos.y / 64) * 64 + 32, 32, Global.MAPSIZE - 32))
+	cursor_snap.global_position = Vector2(clamp(floor(mousepos.x / 64) * 64 + 32, 32, (Global.MAP_TILE_SIZE.y * Global.MAP_MAX_SIZE.y) - 32), clamp(floor(mousepos.y / 64) * 64 + 32, 32, (Global.MAP_TILE_SIZE.y * Global.MAP_MAX_SIZE.y) - 32))
 	
 	## MOST OF THIS FUNCTION ONLY CALLS IF THE MOUSE IS HOLDING A FLOW CIRCLE
-	if current_flow_node != null and flow_dict.has(current_flow_color):
+	if current_flow_node != null and flow_dict.has(current_flow_index):
 		
 		## SET "CURSOR_CLOCK" TO ONLY VALID TILES
 		var is_valid = true
 		
 		## GOING BACKWARDS 1 TILE IS A VALID TILE
-		if flow_dict.get(current_flow_color).has(cursor_snap.global_position): 
+		if flow_dict.get(current_flow_index).has(cursor_snap.global_position): 
 			@warning_ignore("unassigned_variable")
 			var reverse_flow : Array
-			reverse_flow.append_array(flow_dict.get(current_flow_color))
+			reverse_flow.append_array(flow_dict.get(current_flow_index))
 			reverse_flow.reverse()
 			if reverse_flow.size() > 1:
 				if reverse_flow[1] == cursor_snap.global_position:
-					flow_dict.get(current_flow_color).remove_at(flow_dict.get(current_flow_color).size()-1)
+					flow_dict.get(current_flow_index).remove_at(flow_dict.get(current_flow_index).size()-1)
 					is_valid = true
 				else: is_valid = false
 			else:
@@ -146,7 +147,7 @@ func _process(_delta):
 			
 			## UPDATE FLOW POSITION AND DRAW LINES
 			current_flow_node.global_position = cursor_clock.global_position
-			flow_dict.get(current_flow_color).append(current_flow_node.global_position)
+			flow_dict.get(current_flow_index).append(current_flow_node.global_position)
 			canvas.update_flow(flow_dict)
 			
 			## ADVANCE CLOCK
@@ -189,6 +190,6 @@ func _on_reset_button_pressed():
 func _draw():
 	var step = 0
 	for i in range(0,8):
-		draw_line(Vector2(0,step),Vector2(Global.MAPSIZE,step),Color.WHITE,-1,false)
-		draw_line(Vector2(step,0),Vector2(step,Global.MAPSIZE),Color.WHITE,-1,false)
+		draw_line(Vector2(0,step),Vector2(Global.MAP_TILE_SIZE.x * Global.MAP_MAX_SIZE.x , step),Color.WHITE,-1,false)
+		draw_line(Vector2(step,0),Vector2(step , Global.MAP_TILE_SIZE.y * Global.MAP_MAX_SIZE.y),Color.WHITE,-1,false)
 		step += 64

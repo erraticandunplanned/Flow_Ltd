@@ -88,20 +88,88 @@ var menu_levels = {
 				],
 		}
 	},
+	Global.settings: {
+		Global.flow_dictionary: {
+			Color(0.96, 0.96, 0.96, 1): [Vector2(96,96)],
+			Color(0.41, 0.41, 0.41, 1): [Vector2(224,96)],
+			Color(0.23, 0.23, 0.23, 1): [Vector2(288,96)],
+			Color(0.08, 0.08, 0.08, 1): [Vector2(416,96)]
+		},
+		Global.goal_dictionary: {
+			Color(0.96, 0.96, 0.96, 1): Vector2(96,96), ## DEFAULT COLOR 1
+			Color(0.75, 0.75, 0.75, 1): Vector2(160,96),
+			Color(0.41, 0.41, 0.41, 1): Vector2(224,96), ## DEFAULT COLOR 2
+			Color(0.23, 0.23, 0.23, 1): Vector2(288,96), ## DEFAULT COLOR 3
+			Color(0.15, 0.15, 0.15, 1): Vector2(352,96),
+			Color(0.08, 0.08, 0.08, 1): Vector2(416,96), ## DEFAULT COLOR 4
+			
+			## RED
+			Color.DARK_RED: Vector2(96,160),
+			Color.FIREBRICK: Vector2(160,160),
+			Color.MAROON: Vector2(224,160),
+			Color.CRIMSON: Vector2(288,160),
+			Color.PALE_VIOLET_RED: Vector2(352,160),
+			Color.PINK: Vector2(416,160),
+			
+			## YELLOW
+			Color.SADDLE_BROWN: Vector2(96,224),
+			Color.DARK_ORANGE: Vector2(160,224),
+			Color.GOLDENROD: Vector2(224,224),
+			Color.GOLD: Vector2(288,224),
+			Color.TAN: Vector2(352,224),
+			Color.PALE_GOLDENROD: Vector2(416,224),
+			
+			## GREEN
+			Color.OLIVE_DRAB: Vector2(96,288),
+			Color.MEDIUM_SEA_GREEN: Vector2(160,288),
+			Color.MEDIUM_SPRING_GREEN: Vector2(224,288),
+			Color.LAWN_GREEN: Vector2(288,288),
+			Color.LIGHT_GREEN: Vector2(352,288),
+			Color.PALE_GREEN: Vector2(416,288),
+			
+			## BLUE
+			Color.DARK_CYAN: Vector2(96,352),
+			Color.ROYAL_BLUE: Vector2(160,352),
+			Color.CORNFLOWER_BLUE: Vector2(224,352),
+			Color.DODGER_BLUE: Vector2(288,352),
+			Color.MEDIUM_TURQUOISE: Vector2(352,352),
+			Color.PALE_TURQUOISE: Vector2(416,352),
+			
+			# PURPLE
+			Color.REBECCA_PURPLE: Vector2(96,416),
+			Color.DARK_VIOLET: Vector2(160,416),
+			Color.MEDIUM_PURPLE: Vector2(224,416),
+			Color.ORCHID: Vector2(288,416),
+			Color.PLUM: Vector2(352,416),
+			Color.THISTLE: Vector2(416,416)
+		},
+		Global.obstacle_dictionary: {
+			Global.ob_grid: [
+				Vector2(32,32),Vector2(96,32),Vector2(160,32),Vector2(224,32),Vector2(288,32),Vector2(352,32),Vector2(416,32),Vector2(480,32),
+				Vector2(32,96),Vector2(480,96),
+				Vector2(32,160),Vector2(480,160),
+				Vector2(32,224),Vector2(480,224),
+				Vector2(32,288),Vector2(480,288),
+				Vector2(32,352),Vector2(480,352),
+				Vector2(32,416),Vector2(480,416),
+				Vector2(32,480),Vector2(96,480),Vector2(160,480),Vector2(224,480),Vector2(288,480),Vector2(352,480),Vector2(416,480),Vector2(480,480),
+				],
+		}
+	}
 }
 
 var levels = {
 	0: {},
 	1: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(416,288)],
-			Global.node_color_3: [Vector2(160,288)],
-			Global.node_color_4: [Vector2(96,416)]
+			1: [Vector2(416,288)],
+			3: [Vector2(160,288)],
+			4: [Vector2(96,416)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(288,288),
-			Global.node_color_3: Vector2(96,96),
-			Global.node_color_4: Vector2(416,416)
+			1: Vector2(288,288),
+			3: Vector2(96,96),
+			4: Vector2(416,416)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -121,16 +189,16 @@ var levels = {
 	},
 	2: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(160,160)],
-			Global.node_color_2: [Vector2(96,352)],
-			Global.node_color_3: [Vector2(352,160)],
-			Global.node_color_4: [Vector2(288,416)]
+			1: [Vector2(160,160)],
+			2: [Vector2(96,352)],
+			3: [Vector2(352,160)],
+			4: [Vector2(288,416)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(288,352),
-			Global.node_color_2: Vector2(288,288),
-			Global.node_color_3: Vector2(160,352),
-			Global.node_color_4: Vector2(288,96)
+			1: Vector2(288,352),
+			2: Vector2(288,288),
+			3: Vector2(160,352),
+			4: Vector2(288,96)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -150,16 +218,16 @@ var levels = {
 	},
 	3: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(352,160)],
-			Global.node_color_2: [Vector2(224,96)],
-			Global.node_color_3: [Vector2(160,352)],
-			Global.node_color_4: [Vector2(352,288)]
+			1: [Vector2(352,160)],
+			2: [Vector2(224,96)],
+			3: [Vector2(160,352)],
+			4: [Vector2(352,288)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(352,416),
-			Global.node_color_2: Vector2(224,224),
-			Global.node_color_3: Vector2(416,288),
-			Global.node_color_4: Vector2(416,416)
+			1: Vector2(352,416),
+			2: Vector2(224,224),
+			3: Vector2(416,288),
+			4: Vector2(416,416)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -179,14 +247,14 @@ var levels = {
 	},
 	4: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(288,224)],
-			Global.node_color_2: [Vector2(224,224)],
-			Global.node_color_3: [Vector2(32,160)],
+			1: [Vector2(288,224)],
+			2: [Vector2(224,224)],
+			3: [Vector2(32,160)],
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(96,352),
-			Global.node_color_2: Vector2(416,160),
-			Global.node_color_3: Vector2(224,416),
+			1: Vector2(96,352),
+			2: Vector2(416,160),
+			3: Vector2(224,416),
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -203,16 +271,16 @@ var levels = {
 	},
 	5: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(160,160)],
-			Global.node_color_2: [Vector2(352,160)],
-			Global.node_color_3: [Vector2(352,352)],
-			Global.node_color_4: [Vector2(160,352)]
+			1: [Vector2(160,160)],
+			2: [Vector2(352,160)],
+			3: [Vector2(352,352)],
+			4: [Vector2(160,352)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(96,352),
-			Global.node_color_2: Vector2(416,480),
-			Global.node_color_3: Vector2(352,96),
-			Global.node_color_4: Vector2(96,480)
+			1: Vector2(96,352),
+			2: Vector2(416,480),
+			3: Vector2(352,96),
+			4: Vector2(96,480)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -231,14 +299,14 @@ var levels = {
 	},
 	6: {
 		Global.flow_dictionary: {
-			Global.node_color_2: [Vector2(160,288)],
-			Global.node_color_3: [Vector2(416,288)],
-			Global.node_color_4: [Vector2(288,224)]
+			2: [Vector2(160,288)],
+			3: [Vector2(416,288)],
+			4: [Vector2(288,224)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_2: Vector2(416,224),
-			Global.node_color_3: Vector2(96,416),
-			Global.node_color_4: Vector2(96,352)
+			2: Vector2(416,224),
+			3: Vector2(96,416),
+			4: Vector2(96,352)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -258,16 +326,16 @@ var levels = {
 	},
 	7: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(160,352)],
-			Global.node_color_2: [Vector2(352,416)],
-			Global.node_color_3: [Vector2(416,160)],
-			Global.node_color_4: [Vector2(96,352)]
+			1: [Vector2(160,352)],
+			2: [Vector2(352,416)],
+			3: [Vector2(416,160)],
+			4: [Vector2(96,352)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(480,32),
-			Global.node_color_2: Vector2(224,160),
-			Global.node_color_3: Vector2(480,96),
-			Global.node_color_4: Vector2(288,160)
+			1: Vector2(480,32),
+			2: Vector2(224,160),
+			3: Vector2(480,96),
+			4: Vector2(288,160)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -287,12 +355,12 @@ var levels = {
 	},
 	8: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(96,160)],
-			Global.node_color_3: [Vector2(96,288)]
+			1: [Vector2(96,160)],
+			3: [Vector2(96,288)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(416,160),
-			Global.node_color_3: Vector2(416,288)
+			1: Vector2(416,160),
+			3: Vector2(416,288)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -312,14 +380,14 @@ var levels = {
 	},
 	9: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(96,96)],
-			Global.node_color_2: [Vector2(416,96)],
-			Global.node_color_3: [Vector2(416,224)],
+			1: [Vector2(96,96)],
+			2: [Vector2(416,96)],
+			3: [Vector2(416,224)],
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(224,224),
-			Global.node_color_2: Vector2(352,352),
-			Global.node_color_3: Vector2(96,416),
+			1: Vector2(224,224),
+			2: Vector2(352,352),
+			3: Vector2(96,416),
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -339,16 +407,16 @@ var levels = {
 	},
 	10: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(96,480)],
-			Global.node_color_2: [Vector2(96,96)],
-			Global.node_color_3: [Vector2(480,32)],
-			Global.node_color_4: [Vector2(288,416)]
+			1: [Vector2(96,480)],
+			2: [Vector2(96,96)],
+			3: [Vector2(480,32)],
+			4: [Vector2(288,416)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(480,480),
-			Global.node_color_2: Vector2(96,416),
-			Global.node_color_3: Vector2(416,96),
-			Global.node_color_4: Vector2(288,32)
+			1: Vector2(480,480),
+			2: Vector2(96,416),
+			3: Vector2(416,96),
+			4: Vector2(288,32)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -368,16 +436,16 @@ var levels = {
 	},
 	11: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(160,32)],
-			Global.node_color_2: [Vector2(96,96)],
-			Global.node_color_3: [Vector2(352,288)],
-			Global.node_color_4: [Vector2(416,96)]
+			1: [Vector2(160,32)],
+			2: [Vector2(96,96)],
+			3: [Vector2(352,288)],
+			4: [Vector2(416,96)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(288,224),
-			Global.node_color_2: Vector2(224,288),
-			Global.node_color_3: Vector2(224,480),
-			Global.node_color_4: Vector2(96,416)
+			1: Vector2(288,224),
+			2: Vector2(224,288),
+			3: Vector2(224,480),
+			4: Vector2(96,416)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -397,12 +465,12 @@ var levels = {
 	},
 	12: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(96,224)],
-			Global.node_color_4: [Vector2(96,352)]
+			1: [Vector2(96,224)],
+			4: [Vector2(96,352)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(288,416),
-			Global.node_color_4: Vector2(160,416)
+			1: Vector2(288,416),
+			4: Vector2(160,416)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -422,16 +490,16 @@ var levels = {
 	},
 	13: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(160,32)],
-			Global.node_color_2: [Vector2(224,32)],
-			Global.node_color_3: [Vector2(288,32)],
-			Global.node_color_4: [Vector2(352,32)]
+			1: [Vector2(160,32)],
+			2: [Vector2(224,32)],
+			3: [Vector2(288,32)],
+			4: [Vector2(352,32)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(352,352),
-			Global.node_color_2: Vector2(416,352),
-			Global.node_color_3: Vector2(160,352),
-			Global.node_color_4: Vector2(480,224)
+			1: Vector2(352,352),
+			2: Vector2(416,352),
+			3: Vector2(160,352),
+			4: Vector2(480,224)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -446,16 +514,16 @@ var levels = {
 	},
 	14: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(224,96)],
-			Global.node_color_2: [Vector2(96,224)],
-			Global.node_color_3: [Vector2(352,224)],
-			Global.node_color_4: [Vector2(160,288)]
+			1: [Vector2(224,96)],
+			2: [Vector2(96,224)],
+			3: [Vector2(352,224)],
+			4: [Vector2(160,288)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(288,416),
-			Global.node_color_2: Vector2(160,96),
-			Global.node_color_3: Vector2(32,352),
-			Global.node_color_4: Vector2(416,96)
+			1: Vector2(288,416),
+			2: Vector2(160,96),
+			3: Vector2(32,352),
+			4: Vector2(416,96)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -472,15 +540,15 @@ var levels = {
 	},
 	15: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(96,416)],
-			Global.node_color_2: [Vector2(288,352)],
-			Global.node_color_3: [Vector2(352,352)],
-			Global.node_color_4: [Vector2(416,96)]
+			1: [Vector2(96,416)],
+			2: [Vector2(288,352)],
+			3: [Vector2(352,352)],
+			4: [Vector2(416,96)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_2: Vector2(480,96),
-			Global.node_color_3: Vector2(480,416),
-			Global.node_color_4: Vector2(416,288)
+			2: Vector2(480,96),
+			3: Vector2(480,416),
+			4: Vector2(416,288)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -500,12 +568,12 @@ var levels = {
 	},
 	16: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(288,32)],
-			Global.node_color_4: [Vector2(96,352)]
+			1: [Vector2(288,32)],
+			4: [Vector2(96,352)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(480,160),
-			Global.node_color_4: Vector2(96,96)
+			1: Vector2(480,160),
+			4: Vector2(96,96)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -525,16 +593,16 @@ var levels = {
 	},
 	17: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(96,160)],
-			Global.node_color_2: [Vector2(96,224)],
-			Global.node_color_3: [Vector2(96,288)],
-			Global.node_color_4: [Vector2(96,352)]
+			1: [Vector2(96,160)],
+			2: [Vector2(96,224)],
+			3: [Vector2(96,288)],
+			4: [Vector2(96,352)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(416,160),
-			Global.node_color_2: Vector2(416,352),
-			Global.node_color_3: Vector2(416,224),
-			Global.node_color_4: Vector2(416,288)
+			1: Vector2(416,160),
+			2: Vector2(416,352),
+			3: Vector2(416,224),
+			4: Vector2(416,288)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -549,10 +617,10 @@ var levels = {
 	},
 	18: {
 		Global.flow_dictionary: {
-			Global.node_color_3: [Vector2(96,288)]
+			3: [Vector2(96,288)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_3: Vector2(416,288)
+			3: Vector2(416,288)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -572,16 +640,16 @@ var levels = {
 	},
 	19: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(352,32)],
-			Global.node_color_2: [Vector2(32,160)],
-			Global.node_color_3: [Vector2(160,480)],
-			Global.node_color_4: [Vector2(480,352)]
+			1: [Vector2(352,32)],
+			2: [Vector2(32,160)],
+			3: [Vector2(160,480)],
+			4: [Vector2(480,352)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(224,288),
-			Global.node_color_2: Vector2(288,288),
-			Global.node_color_3: Vector2(288,224),
-			Global.node_color_4: Vector2(224,224)
+			1: Vector2(224,288),
+			2: Vector2(288,288),
+			3: Vector2(288,224),
+			4: Vector2(224,224)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -597,16 +665,16 @@ var levels = {
 	},
 	20: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(96,480)],
-			Global.node_color_2: [Vector2(416,480)],
-			Global.node_color_3: [Vector2(160,96)],
-			Global.node_color_4: [Vector2(160,288)]
+			1: [Vector2(96,480)],
+			2: [Vector2(416,480)],
+			3: [Vector2(160,96)],
+			4: [Vector2(160,288)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(288,352),
-			Global.node_color_2: Vector2(480,480),
-			Global.node_color_3: Vector2(160,224),
-			Global.node_color_4: Vector2(160,160)
+			1: Vector2(288,352),
+			2: Vector2(480,480),
+			3: Vector2(160,224),
+			4: Vector2(160,160)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -626,16 +694,16 @@ var levels = {
 	},
 	21: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(160,416)],
-			Global.node_color_2: [Vector2(352,96)],
-			Global.node_color_3: [Vector2(160,96)],
-			Global.node_color_4: [Vector2(288,288)]
+			1: [Vector2(160,416)],
+			2: [Vector2(352,96)],
+			3: [Vector2(160,96)],
+			4: [Vector2(288,288)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(288,224),
-			Global.node_color_2: Vector2(224,416),
-			Global.node_color_3: Vector2(352,416),
-			Global.node_color_4: Vector2(288,32)
+			1: Vector2(288,224),
+			2: Vector2(224,416),
+			3: Vector2(352,416),
+			4: Vector2(288,32)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -655,10 +723,10 @@ var levels = {
 	},
 	22: {
 		Global.flow_dictionary: {
-			Global.node_color_3: [Vector2(96,96)],
+			3: [Vector2(96,96)],
 		},
 		Global.goal_dictionary: {
-			Global.node_color_3: Vector2(416,416),
+			3: Vector2(416,416),
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -678,16 +746,16 @@ var levels = {
 	},
 	23: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(160,160)],
-			Global.node_color_2: [Vector2(416,416)],
-			Global.node_color_3: [Vector2(224,416)],
-			Global.node_color_4: [Vector2(352,416)]
+			1: [Vector2(160,160)],
+			2: [Vector2(416,416)],
+			3: [Vector2(224,416)],
+			4: [Vector2(352,416)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(416,160),
-			Global.node_color_2: Vector2(160,224),
-			Global.node_color_3: Vector2(416,96),
-			Global.node_color_4: Vector2(224,352)
+			1: Vector2(416,160),
+			2: Vector2(160,224),
+			3: Vector2(416,96),
+			4: Vector2(224,352)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -707,16 +775,16 @@ var levels = {
 	},
 	24: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(160,288)],
-			Global.node_color_3: [Vector2(352,480)],
-			Global.node_color_2: [Vector2(480,32)],
-			Global.node_color_4: [Vector2(288,416)]
+			1: [Vector2(160,288)],
+			3: [Vector2(352,480)],
+			2: [Vector2(480,32)],
+			4: [Vector2(288,416)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(416,288),
-			Global.node_color_3: Vector2(416,224),
-			Global.node_color_2: Vector2(416,480),
-			Global.node_color_4: Vector2(96,96)
+			1: Vector2(416,288),
+			3: Vector2(416,224),
+			2: Vector2(416,480),
+			4: Vector2(96,96)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -733,10 +801,10 @@ var levels = {
 	},
 	25: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(96,288)],
+			1: [Vector2(96,288)],
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(416,288),
+			1: Vector2(416,288),
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [
@@ -758,16 +826,16 @@ var levels = {
 	## TEMPLATE LEVEL
 	99: {
 		Global.flow_dictionary: {
-			Global.node_color_1: [Vector2(0,0)],
-			Global.node_color_2: [Vector2(0,0)],
-			Global.node_color_3: [Vector2(0,0)],
-			Global.node_color_4: [Vector2(0,0)]
+			1: [Vector2(0,0)],
+			2: [Vector2(0,0)],
+			3: [Vector2(0,0)],
+			4: [Vector2(0,0)]
 		},
 		Global.goal_dictionary: {
-			Global.node_color_1: Vector2(0,0),
-			Global.node_color_2: Vector2(0,0),
-			Global.node_color_3: Vector2(0,0),
-			Global.node_color_4: Vector2(0,0)
+			1: Vector2(0,0),
+			2: Vector2(0,0),
+			3: Vector2(0,0),
+			4: Vector2(0,0)
 		},
 		Global.obstacle_dictionary: {
 			Global.ob_grid: [

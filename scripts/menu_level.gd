@@ -12,6 +12,7 @@ extends Node2D
 @onready var menutext_main = $Labels/main_menu
 @onready var menutext_levels = $Labels/level_select
 @onready var menutext_about = $Labels/about
+@onready var menutext_settings = $Labels/settings
 
 @onready var count_level = $Labels/main_menu/STATBLOCK/count_levels/CenterContainer/Label
 @onready var count_moves = $Labels/main_menu/STATBLOCK/count_moves/CenterContainer/Label
@@ -46,6 +47,7 @@ func _ready():
 		menutext_main.visible = true
 		menutext_levels.visible = false
 		menutext_about.visible = false
+		menutext_settings.visible = false
 		if Global.completion[1] == true:
 			for i in obstaclecontainer.get_children():
 				if i.global_position == Vector2(416,224):
@@ -69,10 +71,12 @@ func _ready():
 		menutext_main.visible = false
 		menutext_levels.visible = false
 		menutext_about.visible = true
+		menutext_settings.visible = false
 	if Global.menu == Global.level_select:
 		menutext_main.visible = false
 		menutext_levels.visible = true
 		menutext_about.visible = false
+		menutext_settings.visible = false
 		for i in menutext_levels.get_children():
 			if i.name == "Back": continue
 			else:
@@ -84,6 +88,28 @@ func _ready():
 					obstaclecontainer.add_child(new_grid)
 					new_grid.global_position = Vector2(i.global_position.x + 32, i.global_position.y + 32)
 					new_grid.name = str("level ", i.name)
+	if Global.menu == Global.settings:
+		menutext_main.visible = false
+		menutext_levels.visible = false
+		menutext_about.visible = false
+		menutext_settings.visible = true
+		
+		var flow_entry_1 = {}
+		var flow_entry_2 = {}
+		var flow_entry_3 = {}
+		var flow_entry_4 = {}
+		
+		for c in Levels.menu_levels.get(Global.settings).get(Global.goal_dictionary).keys():
+			if Global.node_colors.get(1) == c: flow_entry_1 = {c: [Levels.menu_levels.get(Global.settings).get(Global.goal_dictionary).get(c)]}
+			if Global.node_colors.get(2) == c: flow_entry_2 = {c: [Levels.menu_levels.get(Global.settings).get(Global.goal_dictionary).get(c)]}
+			if Global.node_colors.get(3) == c: flow_entry_3 = {c: [Levels.menu_levels.get(Global.settings).get(Global.goal_dictionary).get(c)]}
+			if Global.node_colors.get(4) == c: flow_entry_4 = {c: [Levels.menu_levels.get(Global.settings).get(Global.goal_dictionary).get(c)]}
+		
+		flow_dict.clear()
+		flow_dict.merge(flow_entry_1)
+		flow_dict.merge(flow_entry_2)
+		flow_dict.merge(flow_entry_3)
+		flow_dict.merge(flow_entry_4)
 	
 	## PLACE INITIAL "FLOW DOTS" ONTO GRID BASED ON "flow_dict" DICTIONARY
 	for f in flow_dict.keys():
@@ -124,7 +150,7 @@ func _process(_delta):
 	
 	## SET "CURSOR_SNAP" TO THE NEAREST GRID LOCATION OF MOUSE
 	var mousepos = get_global_mouse_position()
-	cursor_snap.global_position = Vector2(clamp(floor(mousepos.x / 64) * 64 + 32, 32, Global.MAPSIZE - 32), clamp(floor(mousepos.y / 64) * 64 + 32, 32, Global.MAPSIZE - 32))
+	cursor_snap.global_position = Vector2(clamp(floor(mousepos.x / 64) * 64 + 32, 32, (Global.MAP_TILE_SIZE.y * Global.MAP_MAX_SIZE.y) - 32), clamp(floor(mousepos.y / 64) * 64 + 32, 32, (Global.MAP_TILE_SIZE.y * Global.MAP_MAX_SIZE.y) - 32))
 	
 	## MOST OF THIS FUNCTION ONLY CALLS IF THE MOUSE IS HOLDING A FLOW CIRCLE
 	if current_flow_node != null and flow_dict.has(current_flow_color):
@@ -192,7 +218,9 @@ func check_for_win(pos):
 				get_parent().get_parent().load_level()
 				queue_free()
 			elif pos == Vector2(288,416):
-				get_tree().quit()
+				Global.menu = Global.settings
+				get_parent().get_parent().load_level()
+				queue_free()
 		
 		elif Global.menu == Global.level_select:
 			if pos == Vector2(32,160):
@@ -250,16 +278,25 @@ func check_for_win(pos):
 				Global.menu = Global.main_menu
 				get_parent().get_parent().load_level()
 				queue_free()
+		
+		elif Global.menu == Global.settings:
+			for c in Levels.menu_levels.get(Global.settings).get(Global.goal_dictionary).keys():
+				if Levels.menu_levels.get(Global.settings).get(Global.goal_dictionary).get(c) == pos:
+					if current_flow_color == Global.node_colors[1]: Global.node_colors[1] = c
+					if current_flow_color == Global.node_colors[2]: Global.node_colors[2] = c
+					if current_flow_color == Global.node_colors[3]: Global.node_colors[3] = c
+					if current_flow_color == Global.node_colors[4]: Global.node_colors[4] = c
+			get_parent().get_parent().load_level()
+			queue_free()
 
 func _on_reset_button_pressed():
 	cheat_unlock += 1
-	print(cheat_unlock)
 	if Global.menu == Global.main_menu:
 		if cheat_unlock >= 25:
 			Global.unlock(25)
 			get_parent().get_parent().load_level()
 			queue_free()
-	elif time == 0:
+	else:
 		Global.menu = Global.main_menu
 		get_parent().get_parent().load_level()
 		queue_free()
@@ -268,6 +305,6 @@ func _on_reset_button_pressed():
 func _draw():
 	var step = 0
 	for i in range(0,8):
-		draw_line(Vector2(0,step),Vector2(Global.MAPSIZE,step),Color.WHITE,-1,false)
-		draw_line(Vector2(step,0),Vector2(step,Global.MAPSIZE),Color.WHITE,-1,false)
+		draw_line(Vector2(0,step),Vector2(Global.MAP_TILE_SIZE.x * Global.MAP_MAX_SIZE.x , step),Color.WHITE,-1,false)
+		draw_line(Vector2(step,0),Vector2(step , Global.MAP_TILE_SIZE.y * Global.MAP_MAX_SIZE.y),Color.WHITE,-1,false)
 		step += 64
