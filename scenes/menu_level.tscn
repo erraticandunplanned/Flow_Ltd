@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://g40rve8c1wwg"]
 
-[ext_resource type="Script" path="res://scripts/menu_level.gd" id="1_7eomg"]
-[ext_resource type="Script" path="res://scripts/draw_canvas.gd" id="2_m4ij0"]
+[ext_resource type="Script" uid="uid://01v6qx6an5hy" path="res://scripts/menu_level.gd" id="1_7eomg"]
+[ext_resource type="Script" uid="uid://cgy3bb0qamin8" path="res://scripts/draw_canvas.gd" id="2_m4ij0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ucs3q"]
 font_size = 11
@@ -450,8 +450,7 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="Labels/level_select/4/CenterContainer"]
 layout_mode = 2
-text = "4
-"
+text = "4"
 label_settings = SubResource("LabelSettings_37pf4")
 
 [node name="5" type="Control" parent="Labels/level_select"]
@@ -473,8 +472,7 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="Labels/level_select/5/CenterContainer"]
 layout_mode = 2
-text = "5
-"
+text = "5"
 label_settings = SubResource("LabelSettings_37pf4")
 
 [node name="6" type="Control" parent="Labels/level_select"]
@@ -496,8 +494,7 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="Labels/level_select/6/CenterContainer"]
 layout_mode = 2
-text = "6
-"
+text = "6"
 label_settings = SubResource("LabelSettings_37pf4")
 
 [node name="7" type="Control" parent="Labels/level_select"]
@@ -739,8 +736,7 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="Labels/level_select/17/CenterContainer"]
 layout_mode = 2
-text = "17
-"
+text = "17"
 label_settings = SubResource("LabelSettings_37pf4")
 
 [node name="18" type="Control" parent="Labels/level_select"]
@@ -762,8 +758,7 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="Labels/level_select/18/CenterContainer"]
 layout_mode = 2
-text = "18
-"
+text = "18"
 label_settings = SubResource("LabelSettings_37pf4")
 
 [node name="19" type="Control" parent="Labels/level_select"]
@@ -899,6 +894,7 @@ text = "24"
 label_settings = SubResource("LabelSettings_37pf4")
 
 [node name="about" type="Control" parent="Labels"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -948,8 +944,8 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="Labels/about/Text_1/CenterContainer"]
 layout_mode = 2
-text = "created by erraticandunplanned
-(erraticandunplanned.itch.io)"
+text = "created by polytopeparty
+(polytopeparty.itch.io)"
 label_settings = SubResource("LabelSettings_37pf4")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -1029,6 +1025,145 @@ label_settings = SubResource("LabelSettings_37pf4")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="settings_nav" type="Control" parent="Labels"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Back" type="Control" parent="Labels/settings_nav"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 64.0
+offset_top = 448.0
+offset_right = 128.0
+offset_bottom = 512.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_nav/Back"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/settings_nav/Back/CenterContainer"]
+layout_mode = 2
+text = "BACK"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="Display" type="Control" parent="Labels/settings_nav"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 448.0
+offset_right = 192.0
+offset_bottom = 512.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_nav/Display"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/settings_nav/Display/CenterContainer"]
+layout_mode = 2
+text = "DISPLAY"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="Audio" type="Control" parent="Labels/settings_nav"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 192.0
+offset_top = 448.0
+offset_right = 256.0
+offset_bottom = 512.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_nav/Audio"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/settings_nav/Audio/CenterContainer"]
+layout_mode = 2
+text = "AUDIO"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="Game" type="Control" parent="Labels/settings_nav"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 256.0
+offset_top = 448.0
+offset_right = 320.0
+offset_bottom = 512.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_nav/Game"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/settings_nav/Game/CenterContainer"]
+layout_mode = 2
+text = "GAME"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="Color" type="Control" parent="Labels/settings_nav"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 448.0
+offset_right = 384.0
+offset_bottom = 512.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_nav/Color"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/settings_nav/Color/CenterContainer"]
+layout_mode = 2
+text = "COLOR"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="Player" type="Control" parent="Labels/settings_nav"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 384.0
+offset_top = 448.0
+offset_right = 448.0
+offset_bottom = 512.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_nav/Player"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/settings_nav/Player/CenterContainer"]
+layout_mode = 2
+text = "PLAYER"
+label_settings = SubResource("LabelSettings_37pf4")
+
 [node name="settings_display" type="Control" parent="Labels"]
 visible = false
 layout_mode = 3
@@ -1039,87 +1174,26 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="settings_nav" type="Control" parent="Labels/settings_display"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Back" type="Control" parent="Labels/settings_display/settings_nav"]
+[node name="settings_audio" type="Control" parent="Labels"]
+visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_left = 64.0
-offset_top = 448.0
-offset_right = 128.0
-offset_bottom = 512.0
-mouse_filter = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_display/settings_nav/Back"]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Label" type="Label" parent="Labels/settings_display/settings_nav/Back/CenterContainer"]
-layout_mode = 2
-text = "BACK"
-label_settings = SubResource("LabelSettings_37pf4")
-
-[node name="Display" type="Control" parent="Labels/settings_display/settings_nav"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 128.0
-offset_top = 448.0
-offset_right = 192.0
-offset_bottom = 512.0
 mouse_filter = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_display/settings_nav/Display"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="Labels/settings_display/settings_nav/Display/CenterContainer"]
-layout_mode = 2
-text = "DISPLAY"
-label_settings = SubResource("LabelSettings_37pf4")
-
-[node name="Audio" type="Control" parent="Labels/settings_display/settings_nav"]
+[node name="volume_master" type="Control" parent="Labels/settings_audio"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 192.0
-offset_top = 448.0
-offset_right = 256.0
-offset_bottom = 512.0
-mouse_filter = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_display/settings_nav/Audio"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="Labels/settings_display/settings_nav/Audio/CenterContainer"]
-layout_mode = 2
-text = "AUDIO"
-label_settings = SubResource("LabelSettings_37pf4")
-
-[node name="Game" type="Control" parent="Labels/settings_display/settings_nav"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 256.0
-offset_top = 448.0
+offset_top = 128.0
 offset_right = 320.0
-offset_bottom = 512.0
+offset_bottom = 192.0
 mouse_filter = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_display/settings_nav/Game"]
+[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_audio/volume_master"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1127,22 +1201,100 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Labels/settings_display/settings_nav/Game/CenterContainer"]
+[node name="Label" type="Label" parent="Labels/settings_audio/volume_master/CenterContainer"]
 layout_mode = 2
-text = "GAME
+text = "Master Volume
 "
 label_settings = SubResource("LabelSettings_37pf4")
 
-[node name="Color" type="Control" parent="Labels/settings_display/settings_nav"]
+[node name="volume_music" type="Control" parent="Labels/settings_audio"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 192.0
+offset_top = 256.0
+offset_right = 320.0
+offset_bottom = 320.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_audio/volume_music"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/settings_audio/volume_music/CenterContainer"]
+layout_mode = 2
+text = "Music
+"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="volume_effects" type="Control" parent="Labels/settings_audio"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 192.0
+offset_top = 384.0
+offset_right = 320.0
+offset_bottom = 448.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_audio/volume_effects"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/settings_audio/volume_effects/CenterContainer"]
+layout_mode = 2
+text = "Sound Effects
+"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="settings_game" type="Control" parent="Labels"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="controller_off" type="Control" parent="Labels/settings_game"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 64.0
+offset_right = 192.0
+offset_bottom = 128.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_game/controller_off"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/settings_game/controller_off/CenterContainer"]
+layout_mode = 2
+text = "OFF"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="controller_on" type="Control" parent="Labels/settings_game"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 320.0
-offset_top = 448.0
+offset_top = 64.0
 offset_right = 384.0
-offset_bottom = 512.0
+offset_bottom = 128.0
 mouse_filter = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_display/settings_nav/Color"]
+[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_game/controller_on"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1150,22 +1302,44 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Labels/settings_display/settings_nav/Color/CenterContainer"]
+[node name="Label" type="Label" parent="Labels/settings_game/controller_on/CenterContainer"]
 layout_mode = 2
-text = "COLOR
+text = "ON"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="controller_text" type="Control" parent="Labels/settings_game"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 192.0
+offset_top = 128.0
+offset_right = 320.0
+offset_bottom = 192.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_game/controller_text"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/settings_game/controller_text/CenterContainer"]
+layout_mode = 2
+text = "Controller Support
 "
 label_settings = SubResource("LabelSettings_37pf4")
 
-[node name="Player" type="Control" parent="Labels/settings_display/settings_nav"]
+[node name="symbol_off" type="Control" parent="Labels/settings_game"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 384.0
-offset_top = 448.0
-offset_right = 448.0
-offset_bottom = 512.0
+offset_left = 128.0
+offset_top = 192.0
+offset_right = 192.0
+offset_bottom = 256.0
 mouse_filter = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_display/settings_nav/Player"]
+[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_game/symbol_off"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1173,9 +1347,120 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Labels/settings_display/settings_nav/Player/CenterContainer"]
+[node name="Label" type="Label" parent="Labels/settings_game/symbol_off/CenterContainer"]
 layout_mode = 2
-text = "PLAYER
+text = "OFF"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="symbol_on" type="Control" parent="Labels/settings_game"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 192.0
+offset_right = 384.0
+offset_bottom = 256.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_game/symbol_on"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/settings_game/symbol_on/CenterContainer"]
+layout_mode = 2
+text = "ON"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="symbol_text" type="Control" parent="Labels/settings_game"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 192.0
+offset_top = 256.0
+offset_right = 320.0
+offset_bottom = 320.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_game/symbol_text"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/settings_game/symbol_text/CenterContainer"]
+layout_mode = 2
+text = "Visual Symbols
+"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="EXTRA_off" type="Control" parent="Labels/settings_game"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 128.0
+offset_top = 320.0
+offset_right = 192.0
+offset_bottom = 384.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_game/EXTRA_off"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/settings_game/EXTRA_off/CenterContainer"]
+layout_mode = 2
+text = "OFF"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="EXTRA_on" type="Control" parent="Labels/settings_game"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 320.0
+offset_right = 384.0
+offset_bottom = 384.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_game/EXTRA_on"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/settings_game/EXTRA_on/CenterContainer"]
+layout_mode = 2
+text = "ON"
+label_settings = SubResource("LabelSettings_37pf4")
+
+[node name="EXTRA_text" type="Control" parent="Labels/settings_game"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 192.0
+offset_top = 384.0
+offset_right = 320.0
+offset_bottom = 448.0
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_game/EXTRA_text"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Labels/settings_game/EXTRA_text/CenterContainer"]
+layout_mode = 2
+text = "Unlock all Levels
 "
 label_settings = SubResource("LabelSettings_37pf4")
 
@@ -1189,145 +1474,15 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="settings_nav" type="Control" parent="Labels/settings_color"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Back" type="Control" parent="Labels/settings_color/settings_nav"]
+[node name="settings_player" type="Control" parent="Labels"]
+visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_left = 64.0
-offset_top = 448.0
-offset_right = 128.0
-offset_bottom = 512.0
-mouse_filter = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_color/settings_nav/Back"]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Label" type="Label" parent="Labels/settings_color/settings_nav/Back/CenterContainer"]
-layout_mode = 2
-text = "BACK"
-label_settings = SubResource("LabelSettings_37pf4")
-
-[node name="Display" type="Control" parent="Labels/settings_color/settings_nav"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 128.0
-offset_top = 448.0
-offset_right = 192.0
-offset_bottom = 512.0
 mouse_filter = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_color/settings_nav/Display"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="Labels/settings_color/settings_nav/Display/CenterContainer"]
-layout_mode = 2
-text = "DISPLAY"
-label_settings = SubResource("LabelSettings_37pf4")
-
-[node name="Audio" type="Control" parent="Labels/settings_color/settings_nav"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 192.0
-offset_top = 448.0
-offset_right = 256.0
-offset_bottom = 512.0
-mouse_filter = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_color/settings_nav/Audio"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="Labels/settings_color/settings_nav/Audio/CenterContainer"]
-layout_mode = 2
-text = "AUDIO"
-label_settings = SubResource("LabelSettings_37pf4")
-
-[node name="Game" type="Control" parent="Labels/settings_color/settings_nav"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 256.0
-offset_top = 448.0
-offset_right = 320.0
-offset_bottom = 512.0
-mouse_filter = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_color/settings_nav/Game"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="Labels/settings_color/settings_nav/Game/CenterContainer"]
-layout_mode = 2
-text = "GAME
-"
-label_settings = SubResource("LabelSettings_37pf4")
-
-[node name="Color" type="Control" parent="Labels/settings_color/settings_nav"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 320.0
-offset_top = 448.0
-offset_right = 384.0
-offset_bottom = 512.0
-mouse_filter = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_color/settings_nav/Color"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="Labels/settings_color/settings_nav/Color/CenterContainer"]
-layout_mode = 2
-text = "COLOR
-"
-label_settings = SubResource("LabelSettings_37pf4")
-
-[node name="Player" type="Control" parent="Labels/settings_color/settings_nav"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 384.0
-offset_top = 448.0
-offset_right = 448.0
-offset_bottom = 512.0
-mouse_filter = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="Labels/settings_color/settings_nav/Player"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="Labels/settings_color/settings_nav/Player/CenterContainer"]
-layout_mode = 2
-text = "PLAYER
-"
-label_settings = SubResource("LabelSettings_37pf4")
 
 [node name="cursor_snap" type="Node2D" parent="."]
 modulate = Color(0.853352, 0.342064, 0.394375, 1)

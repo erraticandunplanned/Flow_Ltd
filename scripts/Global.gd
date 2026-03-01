@@ -74,6 +74,13 @@ var node_colors = {
 	4: Color(0.08, 0.08, 0.08, 1)
 }
 
+var game_controllersupport = false
+var game_visualsymbols = false
+var game_unlockall = false
+var audio_master = 5
+var audio_music = 5
+var audio_effects = 5
+
 #var node_color_1 = Color(0.96, 0.96, 0.96, 1) # White Smoke
 #var node_color_2 = Color(0.41, 0.41, 0.41, 1) # Dim Gray
 #var node_color_3 = Color(0.23, 0.23, 0.23, 1)
@@ -106,4 +113,4 @@ enum {
 
 func unlock(unlock_to : int):
 	for i in completion.size():
-		if i < unlock_to: completion[i] = true
+		completion[i] = true if i < unlock_to else false
